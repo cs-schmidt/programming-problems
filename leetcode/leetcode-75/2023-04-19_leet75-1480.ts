@@ -1,4 +1,5 @@
 // Problem 1480: Running Sum of 1d Array
+// NOTE: Popular question.
 
 function runningSum(nums: number[]): number[] {
   const result: number[] = [];

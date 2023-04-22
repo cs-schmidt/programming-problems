@@ -1,6 +1,5 @@
 // Problem 662: Maximum Width of Binary Tree
-
-// TODO: Complete this challenge.
+// FIXME: Complete this challenge.
 
 /**
  * Definition for a binary tree node.

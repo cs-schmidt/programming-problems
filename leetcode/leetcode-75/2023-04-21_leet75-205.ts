@@ -1,5 +1,6 @@
 // Problem 205: Isomorphic Strings
 // NOTE: Popular question.
+// FIXME: Enhance this solution later.
 
 function isIsomorphic(s: string, t: string): boolean {
 	// If strings `s` and `t` are isomorphic, then they must have the same length.

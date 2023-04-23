@@ -1,5 +1,6 @@
 // Problem 142: Linked List Cycle II
 // NOTE: Popular question.
+// TODO: Try follow up solution.
 
 /**
  * Constraints:

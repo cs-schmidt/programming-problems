@@ -1,6 +1,6 @@
 // Problem 21: Merge Two Sorted Lists
 // NOTE: Popular question.
-// FIXME: Enhance this solution later.
+// TODO: Produce further optimized version.
 
 /**
  * Constraints:

@@ -1,5 +1,6 @@
 // Problem 121: Best Time to Buy and Sell a Stock
 // NOTE: Popular question
+// TODO: Produce further optimized version.
 
 /**
  * Constraints:
@@ -9,7 +10,7 @@
  *
  */
 
-// *** First Version ***
+// *** First Submission ***
 function maxProfit(prices: number[]): number {
   // Initialize two variables `minEntry` and `profit`, where the former tracks 
   // the minimum entry price encountered as we traverse `prices`, and the latter

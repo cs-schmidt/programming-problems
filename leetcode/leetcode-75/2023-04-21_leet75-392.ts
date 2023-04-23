@@ -1,6 +1,6 @@
 // Problem 392: Is Subsequence
 // NOTE: Popular questions.
-// FIXME: Enhance this solution later.
+// TODO: Produce further optimized version.
 
 /**
  * Constraints:

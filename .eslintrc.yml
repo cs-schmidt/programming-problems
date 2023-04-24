@@ -1,0 +1,17 @@
+# ESLint Configuration
+
+root: true
+env:
+  es2022: true
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaVersion: 13 # version 13 matches es2022 (this option should tsconfig's `target` option)
+  project: './tsconfig.json'
+  sourceType: 'module'
+extends:
+  - 'airbnb-base'
+  - 'plugin:@typescript-eslint/recommended'
+  - 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+  - 'prettier'
+plugins:
+  - '@typescript-eslint'

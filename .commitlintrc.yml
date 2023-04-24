@@ -1,0 +1,3 @@
+# Commitlint Configuration
+
+extends: '@commitlint/config-conventional'

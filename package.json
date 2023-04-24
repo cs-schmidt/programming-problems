@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "description": "A collection of solutions to programming exercises.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS-Schmidt/challenge-problems.git"
+  },
+  "author": {
+    "name": "Ethan Schmidt",
+    "email": "es.schmidt.cs@gmail.com",
+    "url": "https://cs-schmidt.dev"
+  },
+  "type": "module",
+  "scripts": {
+    "format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
+    "lint": "eslint --ignore-path .gitignore --fix '**/*.{js,mjs,cjs,ts,mts,cts}'",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.1",
+    "@commitlint/config-conventional": "^17.6.1",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "eslint": "^8.39.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
+    "prettier": "^2.8.8",
+    "sort-package-json": "^2.4.1"
+  }
+}

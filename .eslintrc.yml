@@ -15,3 +15,13 @@ extends:
   - 'prettier'
 plugins:
   - '@typescript-eslint'
+rules:
+  no-restricted-syntax:
+    - 'off'
+  lines-between-class-members:
+    - 'off'
+  '@typescript-eslint/lines-between-class-members':
+    - 'off'
+  no-use-before-define: off
+  '@typescript-eslint/no-use-before-define':
+    - 'error'

@@ -10,7 +10,6 @@
     "email": "es.schmidt.cs@gmail.com",
     "url": "https://cs-schmidt.dev"
   },
-  "type": "module",
   "scripts": {
     "format": "prettier --ignore-path .gitignore --ignore-unknown --write .",
     "lint": "eslint --ignore-path .gitignore --fix '**/*.{js,mjs,cjs,ts,mts,cts}'",

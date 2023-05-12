@@ -1,5 +1,0 @@
-# Lint-Staged Configuration
-
-'?(.)*.?(c|m)[j|t]s': 'eslint --ignore-path .gitignore --fix'
-'?(.)*': 'prettier --ignore-path .gitignore --ignore-unknown --write'
-'**/package.json': 'npx sort-package-json'

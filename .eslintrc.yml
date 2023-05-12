@@ -30,3 +30,8 @@ rules:
     - 'off'
   consistent-return:
     - 'warn'
+  no-plusplus:
+    - 'error'
+    - allowForLoopAfterthoughts: true
+  eqeqeq:
+    - 'warn'

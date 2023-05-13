@@ -8,6 +8,14 @@
  * 3) s and t consist of any valid ascii character.
  */
 
+// TODO: Modify this solution.
+
+/**
+ * 1) Think about a data structure to store the values of `mappings` and the
+ *    set `mappedTo` in the same memory space. This will reduce th space
+ *    complexity.
+ */
+
 function isIsomorphic(s: string, t: string): boolean {
   /**
    * Given the constraints of the problem, we only have to determine if there's a

@@ -1,6 +1,5 @@
 // Problem 392: Is Subsequence
-// NOTE: Popular questions.
-// TODO: Produce further optimized version.
+// TODO: Complete the follow up for this problem.
 
 /**
  * Constraints:
@@ -12,34 +11,26 @@
  */
 
 function isSubsequence(s: string, t: string): boolean {
-	// We want to know if a subsequence of `t` matches `s`. This could only be the
-	// case when the length of `s` is less than or equal to the length of `t`.
-	if (s.length > t.length) return false;
+  // When `s` is the empty string, then we return `true` immediately since the
+  // empty string is a subsequence of any string `t`.
+  if (s.length == 0) return true;
 
-	// We check both `s` and `t` going left to right, while the remaining
-	// characters of `s` are less than that of the remaining characters of`t`.
-	let sIdx: number = 0;
-	let tIdx: number = 0;
-	while (charsLeft(s, sIdx) <= charsLeft(t, tIdx) && charsLeft(s, sIdx) !== 0) {
-		if (s[sIdx] === t[tIdx]) sIdx++;
-		tIdx++;
-	}
+  // We know `s` is a subsequence of `t` when an ordered traversal over `t` is
+  // able to "spell" `s`. We can keep track of the indexes we were able to spell
+  //  up to in `s` as we traverse `t`: `sIndex` and `tIndex`.
+  let sIndex: number = 0;
+  let tIndex: number = 0;
 
-	// Either the characters left in `s` was greater than that of the characters
-	// left in `t`, or there are no more characters left in `s`.
-	if (charsLeft(s, sIdx) > charsLeft(t, tIdx)) return false;
-	else if (s[sIdx - 1] === t[tIdx - 1]) return true;
-	else return false;
+  // We continue to traverse `t` while it we haven't reached the end or the
+  // remaining characters to check in `t` are not less than the remaining
+  // characters in `s` that we still have to spell up to.
+  while (!(tIndex == t.length || t.length - tIndex < s.length - sIndex)) {
+    if (s[sIndex] == t[tIndex]) sIndex += 1;
+    tIndex += 1;
+  }
 
-	// ******************************
-
-	/**
-	 * Computes the number of characters remaining in a string starting from an
-	 * index.
-	 */
-	function charsLeft(str: string, i: number) {
-		if (i < 0) throw RangeError();
-		else if (str.length - 1 < i) return 0;
-		return str.length - i;
-	}
+  // If after looping process above, we got a spelling of `s`, then return true.
+  // Otherwise, the result is false.
+  if (sIndex == s.length) return true;
+  return false;
 }

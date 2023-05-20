@@ -35,3 +35,5 @@ rules:
     - allowForLoopAfterthoughts: true
   eqeqeq:
     - 'warn'
+  no-var:
+    - 'off'

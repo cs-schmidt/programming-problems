@@ -37,3 +37,7 @@ rules:
     - 'warn'
   no-var:
     - 'off'
+  vars-on-top:
+    - 'off'
+  no-param-reassign:
+    - 'warn'

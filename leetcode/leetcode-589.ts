@@ -1,6 +1,7 @@
 // Problem 589: N-ary Preorder Traversal
 // NOTE: Popular question.
 // TODO: Produce further optimized version.
+// TODO: Produce iterative solution.
 
 /**
  * Constraints:

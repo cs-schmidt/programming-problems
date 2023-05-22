@@ -36,15 +36,24 @@ function isValidBST(root: TreeNode | null): boolean {
   ) {
     if (!node) return true;
     if (left) {
-      console.log(`side: ${left ? 'left' : 'right'}, node: ${node.left?.val}, gpNode: ${gpNode?.val}`);
+      console.log(
+        `side: ${left ? 'left' : 'right'}, node: ${node.left?.val}, gpNode: ${
+          gpNode?.val
+        }`
+      );
       if (node.left?.val > node.val) return false;
-      if (node.right?.val < node.val || node.right?.val > gpNode?.val) return false;
+      if (node.right?.val < node.val || node.right?.val > gpNode?.val)
+        return false;
       if (!node.left && !node.right) return true;
-    } 
-    else {
-      console.log(`side: ${left ? 'left' : 'right'}, node: ${node.right?.val}, gpNode: ${gpNode?.val}`);
+    } else {
+      console.log(
+        `side: ${left ? 'left' : 'right'}, node: ${node.right?.val}, gpNode: ${
+          gpNode?.val
+        }`
+      );
       if (node.right?.val < node.val) return false;
-      if (node.left?.val > node.val || node.left?.val < gpNode?.val) return false;
+      if (node.left?.val > node.val || node.left?.val < gpNode?.val)
+        return false;
       if (!node.left && !node.right) return true;
     }
     checkChildren(node.left, true, node);

@@ -26,7 +26,7 @@ function reverseList(head: ListNode | null): ListNode | null {
   let result: ListNode | null = null;
   let node: ListNode | null = head;
   while (typeof node?.val === 'number' || node?.next) {
-		result = new ListNode(node.val, result);
+    result = new ListNode(node.val, result);
     node = node?.next;
   }
   return result;

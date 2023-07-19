@@ -1,5 +1,13 @@
 # Lint-Staged Configuration
+#
+# Matches files in the git staging area (keys) and applies the commands (values)
+# with the files as input; keys use extended globbing.
 
+# Lints all JS-type files.
 '?(.)*.?(c|m)[j|t]s': 'eslint --ignore-path .gitignore --fix'
-'?(.)*': 'prettier --ignore-path .gitignore --ignore-unknown --write'
-'**/package.json': 'npx sort-package-json'
+
+# Formats all files prettier supports.
+'**/?(.)*': 'prettier --ignore-path .gitignore --ignore-unknown --write'
+
+# Sorts package.json file's keys.
+'package.json': 'sort-package-json'

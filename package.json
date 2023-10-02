@@ -3,11 +3,11 @@
   "description": "A collection of solutions to programming exercises.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CS-Schmidt/challenge-problems.git"
+    "url": "git+https://github.com/cs-schmidt/programming-problems.git"
   },
   "author": {
     "name": "Ethan Schmidt",
-    "email": "es.schmidt.cs@gmail.com",
+    "email": "ebs.euler@gmail.com",
     "url": "https://cs-schmidt.dev"
   },
   "scripts": {

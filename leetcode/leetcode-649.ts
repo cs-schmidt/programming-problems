@@ -1,10 +1,13 @@
 // Problem 649: Dota2 Senate
 
+// TODO: Improve solution
+
 /**
  * Constraints
  *
  * 1) 1 <= senate.length <= 10^4
  * 2) senate[i] is either 'R' or 'D'.
+ *
  */
 
 /**
@@ -17,50 +20,57 @@
  * rounds repeat until one of the two parties is victorious.It's assumed that
  * each party member will vote in such a way that serves their party best.
  *
- * I believe the most optimal vote for any individual senator to vote will
- * mean that they ensure as many of their collegues will retain voting rights by
- * the end of any given round.
+ * I believe the most optimal vote for any individual senator to vote will mean
+ * that they ensure as many of their collegues will retain voting rights by the
+ * end of any given round.
  */
 function predictPartyVictory(senate: string): string {
-  let activeRadiants = 0;
-  let activeDires = 0;
+  let activeP1Members = 0;
+  let activeP2Members = 0;
+  let p1RoundVotes = 0;
+  let p2RoundVotes = 0;
+  let votingMembers: Set<number> = new Set();
 
-  // Conduct the first round of voting.
-  let i = 0;
-  let j = i + 1;
-  while (i != senate.length - 1) {
-    // Count the current voting member as active.
-    if (senate[i] == 'R') activeRadiants += 1;
-    else activeDires += 1;
-
-    // Cast the current members vote.
-    while (senate[j] == senate[i]) {
-      if (senate[i] == 'R') activeRadiants += 1;
-      else activeDires += 1;
-      j += 1;
+  for (let i = 0; i < senate.length; i++) {
+    if (senate[i] == 'R') {
+      if (p2RoundVotes > 0) p2RoundVotes -= 1;
+      else {
+        votingMembers.add(i);
+        p1RoundVotes += 1;
+        activeP1Members += 1;
+      }
+    } else if (p1RoundVotes > 0) p1RoundVotes -= 1;
+    else {
+      votingMembers.add(i);
+      p2RoundVotes += 1;
+      activeP2Members += 1;
     }
-    // Strip the opposing member from `senate`.
-    senate = senate.substring(0, j) + senate.substring(j + 1);
-
-    // Go to the next member in `senate` that will vote.
-    i += 1;
-    console.log(`${senate} ${i} ${j}`);
   }
-  console.log(senate);
 
-  // Were at the last voting member in `senate` which is the last element in
-  // `senate` because of our deletion. So we prepare to take their vote.
-  j = 0;
-  while (senate[j] == senate[i]) {
-    if (senate[i] == 'R') activeRadiants += 1;
-    else activeDires += 1;
-    j += 1;
+  while (
+    !(activeP1Members - p2RoundVotes >= 2 * activeP2Members) &&
+    !(activeP2Members - p1RoundVotes >= 2 * activeP1Members)
+  ) {
+    const retainedVoters: Set<number> = new Set();
+    for (const member of votingMembers) {
+      if (senate[member] == 'R') {
+        if (p2RoundVotes > 0) p2RoundVotes -= 1;
+        else {
+          retainedVoters.add(member);
+          p1RoundVotes += 1;
+          activeP1Members += 1;
+        }
+      } else if (p1RoundVotes > 0) p1RoundVotes -= 1;
+      else {
+        retainedVoters.add(member);
+        p2RoundVotes += 1;
+        activeP2Members += 1;
+      }
+    }
+    votingMembers = retainedVoters;
   }
-  // Strip the opposing member from `senate`.
-  senate = senate.substring(0, j) + senate.substring(j + 1);
-  // Go to the next member in `senate` that will vote.
-  i = 0;
-  console.log(senate);
 
-  return senate;
+  return activeP1Members - p2RoundVotes >= 2 * activeP2Members
+    ? 'Radiant'
+    : 'Dire';
 }

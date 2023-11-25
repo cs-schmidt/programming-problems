@@ -1,13 +1,13 @@
-// Problem 53: Maximum Subarray
-
-// TODO: Write an implementation of the divide-and-conquer approach.
-
 /**
+ * Problem 53: Maximum Subarray
+ *
  * Constraints:
  *
- * 1) 1 <= nums.length <= 10^5
- * 2) -10^4 <= nums[i] <= 10^4
+ *  1. 1 <= nums.length <= 10^5
+ *  2. -10^4 <= nums[i] <= 10^4
  */
+
+// TODO: Write a solution with the divide-and-conquer approach.
 
 /**
  * Iterative Solution.
@@ -22,7 +22,7 @@
  * iterations current value. The final return value at the end of iteration is
  * `maxThusFound`.
  *
- * Complexity: O(n) time and O(1) auxiliary space; a linear iteration.
+ * Complexity: O(n) time and O(1) auxiliary space.
  */
 function maxSubArray(nums: number[]): number {
   let maxThusFound = nums[0];

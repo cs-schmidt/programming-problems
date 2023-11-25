@@ -1,5 +1,7 @@
 // Problem 53: Maximum Subarray
 
+// TODO: Write an implementation of the divide-and-conquer approach.
+
 /**
  * Constraints:
  *
@@ -7,57 +9,31 @@
  * 2) -10^4 <= nums[i] <= 10^4
  */
 
+/**
+ * Iterative Solution.
+ *
+ * This is an implementation of Kadane's algorithm. The process is a linear
+ * iteration where we go over each value in `nums` and assesses two variables:
+ * `maxThusFound` and `maxOnCurrVal`. The former tracks the greatest sum of a
+ * sequence at or before the current value in nums, and the latter tracks the
+ * greatest sum of a sequence that would end on the current value (from left to
+ * right). Whenever `maxOnCurrVal` goes below 0 it resets (we set it back to 0),
+ * this gets rid of the 'negative contributing' subsequence before the next
+ * iterations current value. The final return value at the end of iteration is
+ * `maxThusFound`.
+ *
+ * Complexity: O(n) time and O(1) auxiliary space; a linear iteration.
+ */
 function maxSubArray(nums: number[]): number {
-  // Initialize two variables, the `result` and `index`. The former will be
-  // simply that, the result that is returned, and the latter will be the
-  // current index in `nums` as we iterate from left to right.
-  let result = nums[0];
-  let index = 0;
+  let maxThusFound = nums[0];
+  let maxOnCurrVal = 0;
 
-  // We start by checking from the start the longest sequence of negative
-  // integers in `nums`.
-  while (nums[index] < 0 && index < nums.length) {
-    if (nums[index] > result) result = nums[index];
-    index += 1;
+  for (const val of nums) {
+    maxOnCurrVal += val;
+
+    if (maxOnCurrVal > maxThusFound) maxThusFound = maxOnCurrVal;
+    if (maxOnCurrVal < 0) maxOnCurrVal = 0;
   }
 
-  // Now we've landed upon a non-negative number assuming `index` is less than
-  // `nums.length`.
-  if (index < nums.length) {
-    // Initialize result to the current value: a non-negative number.
-    result = nums[index];
-    let partitionMSum = 0;
-    let partitionCSum = 0;
-    index += 1;
-
-    while (index < nums.length) {
-      while (nums[index] < 0 && index < nums.length) {
-        partitionCSum += nums[index];
-        index += 1;
-      }
-
-      while (nums[index] >= 0 && index < nums.length) {
-        partitionMSum += nums[index];
-        index += 1;
-      }
-
-      if (
-        result + partitionCSum + partitionMSum >
-        Math.max(result, partitionMSum)
-      ) {
-        result += partitionCSum + partitionMSum;
-        partitionMSum = 0;
-        partitionCSum = 0;
-      } else if (result < partitionMSum) {
-        result = partitionMSum;
-        partitionMSum = 0;
-        partitionCSum = 0;
-      } else {
-        partitionCSum += partitionMSum;
-        partitionMSum = 0;
-      }
-    }
-  }
-
-  return result;
+  return maxThusFound;
 }

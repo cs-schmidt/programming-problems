@@ -23,114 +23,102 @@ class TreeNode {
 }
 
 /**
- * <solution approach>
+ * Iterative and Imperative Solution.
  *
  * <description>
  *
- * Complexity: <time complexity> and <space complexity>.
+ * Complexity: O(nodes) time and O(height + 1) + O(1) auxiliary space.
  */
 function widthOfBinaryTree(root: TreeNode) {
   var max = 1;
-  var level = 1;
+  var level = 0;
   var leftNodes: TreeNode[] = [root];
   var rightNodes: TreeNode[] = [root];
   var leftOmission = 0;
   var rightOmission = 0;
 
-  while (
-    !(
-      // Leftmost and rightmost are not the same with no children.
-      (
-        isEndpoint() ||
-        // Leftmost and rightmost share the same parent and both have no
-        // children.
-        (leftNodes.at(-2) === rightNodes.at(-2) &&
-          !hasChildren(leftNodes.at(-1)) &&
-          !hasChildren(rightNodes.at(-1)))
-      )
-    )
-  ) {
+  while (!atEndpoint()) {
+    level += 1;
     leftOmission *= 2;
     rightOmission *= 2;
 
-    // Find the leftmost node to the next `level`: use in-order depth-first
-    // traversal.
+    // Find leftmost node of `level` (in-order DF traversal).
     do {
       if (leftNodes.at(-1).left) leftNodes.push(leftNodes.at(-1).left);
-      else if (leftNodes.at(-1).right) leftNodes.push(leftNodes.at(-1).right);
-      else if (leftNodes.length - 1 < level && !isEndpoint()) {
+      else if (leftNodes.at(-1).right) {
+        // NOTE: Condition required here.
+        // Contribute left subtree's omission from `leftNode.at(-1)`.
+        leftOmission += 2 ** (level - leftNodes.length);
+        leftNodes.push(leftNodes.at(-1).right);
+      } else if (leftNodes.length - 1 < level && !atEndpoint()) {
+        // Contribute left and right subtree omissions from `leftNode.at(-1)`.
         leftOmission += 2 ** (level - leftNodes.length + 1);
-        console.log(`on node: ${leftNodes.at(-1).val}`);
-        console.log(`leftOmission: ${leftOmission}`);
         let topNode: TreeNode = leftNodes.pop();
         while (
           (topNode === leftNodes.at(-1).left && !leftNodes.at(-1).right) ||
           topNode === leftNodes.at(-1).right
         ) {
-          if (!leftNodes.at(-1).right)
-            leftOmission += 2 ** (level - leftNodes.length);
-          console.log(`on node: ${leftNodes.at(-1).val}`);
-          console.log(`leftOmission: ${leftOmission}`);
+          // NOTE: Condition required here.
+          // Contribute right subtree's omission from `leftNode.at(-1)`.
+          leftOmission += 2 ** (level - leftNodes.length);
           topNode = leftNodes.pop();
         }
         leftNodes.push(leftNodes.at(-1).right);
       }
-    } while (leftNodes.length - 1 < level && !isEndpoint());
+    } while (leftNodes.length - 1 < level && !atEndpoint());
 
-    // Find the rightmost node to the next `level`: use reverse in-order
-    // depth-first traversal.
+    // Find rightmost node of `level` (reverse in-order DF traversal).
     do {
       if (rightNodes.at(-1).right) rightNodes.push(rightNodes.at(-1).right);
-      else if (rightNodes.at(-1).left) rightNodes.push(rightNodes.at(-1).left);
-      else if (rightNodes.length - 1 < level && !isEndpoint()) {
+      else if (rightNodes.at(-1).left) {
+        // Contribute right subtree's omission from `rightNode.at(-1)`.
+        rightOmission += 2 ** (level - rightNodes.length);
+        rightNodes.push(rightNodes.at(-1).left);
+      } else if (rightNodes.length - 1 < level && !atEndpoint()) {
+        // Contribute left and right subtree omissions from `rightNodes.at(-1)`.
         rightOmission += 2 ** (level - rightNodes.length + 1);
-        console.log(`on node: ${rightNodes.at(-1).val}`);
-        console.log(`righttOmission: ${rightOmission}`);
         let topNode: TreeNode = rightNodes.pop();
         while (
           (topNode === rightNodes.at(-1).right && !rightNodes.at(-1).left) ||
           topNode === rightNodes.at(-1).left
         ) {
-          if (!rightNodes.at(-1).left)
+          // Contribute left subtree's omission from `rightNode.at(-1)`.
+          if (!rightNodes.at(-1).right)
             rightOmission += 2 ** (level - rightNodes.length);
-          console.log(`on node: ${rightNodes.at(-1).val}`);
-          console.log(`righttOmission: ${rightOmission}`);
           topNode = rightNodes.pop();
         }
         rightNodes.push(rightNodes.at(-1).left);
       }
-    } while (rightNodes.length - 1 < level && !isEndpoint());
+    } while (rightNodes.length - 1 < level && !atEndpoint());
 
-    console.log(`rightOmission: ${rightOmission}`);
+    console.log('*'.repeat(30));
+    console.log(`Iteration for level ${level}`);
+    console.log(leftOmission);
+    console.log(rightOmission);
+    console.log(`left node: ${leftNodes.at(-1).val}`);
+    console.log(`right node: ${rightNodes.at(-1).val}`);
 
-    // Update max here.
-    if (2 ** level - leftOmission - rightOmission > max)
-      max = 2 ** level - leftOmission - rightOmission;
-
-    level += 1;
+    if (levelWidth() > max) max = levelWidth();
   }
 
   return max;
 
   // Internal Procedures
   // =================================================================
-  // <insert internal procedures here>
-  function hasChildren(node: TreeNode): boolean {
-    return Boolean(node.left || node.right);
-  }
-
-  function isEndpoint(): boolean {
+  /**  */
+  function atEndpoint(): boolean {
     return (
       leftNodes.at(-1) === rightNodes.at(-1) && !hasChildren(leftNodes.at(-1))
     );
   }
+
+  /** Checks if `node` has children. */
+  function hasChildren(node: TreeNode): boolean {
+    return Boolean(node.left || node.right);
+  }
+
+  /** Calculates the width of the current `level`. */
+  function levelWidth(): number {
+    return 2 ** level - leftOmission - rightOmission;
+  }
 }
-
-// [1,3,2,5,3,null,9]
-var testTree = new TreeNode(
-  1,
-  new TreeNode(3, new TreeNode(5), new TreeNode(3)),
-  new TreeNode(2, new TreeNode(9), null)
-);
-
-console.log(widthOfBinaryTree(testTree));

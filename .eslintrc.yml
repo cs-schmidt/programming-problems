@@ -45,3 +45,5 @@ rules:
     - 'warn'
   max-classes-per-file:
     - 'off'
+  prefer-arrow-callback:
+    - 'off'

@@ -1,16 +1,14 @@
-// Problem 1428: Leftmost Column with at Least a One
-
 /**
+ * Problem 1428: Leftmost Column with at Least a One
+ *
  * Constraints:
- *
- * 1) rows == mat.length
- * 2) cols == mat[i].length
- * 3) 1 <= rows, cols <= 100
- * 4) mat[i][j] is either 0 or 1
- * 5) mat[i] is sorted in non-decreasing order
- * 6) BinaryMatrix.get can only be called 1000 times or less
- * 7) You can only access the binary matrix through it's interface
- *
+ *  1. rows == mat.length
+ *  2. cols == mat[i].length
+ *  3. 1 <= rows, cols <= 100
+ *  4. mat[i][j] is either 0 or 1
+ *  5. mat[i] is sorted in non-decreasing order
+ *  6. BinaryMatrix.get can only be called 1000 times or less
+ *  7. You can only access the binary matrix through it's interface
  */
 
 // Below is the BinaryMatrix's API interface. You should not implement it, or

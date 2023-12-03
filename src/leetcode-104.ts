@@ -46,7 +46,6 @@ function maxDepth(root: TreeNode | null): number {
 
   // Internal Procedures
   // =================================================================
-
   function recursivePostTraversal(node: TreeNode | null) {
     traversalDepth += 1;
     if (node.left) recursivePostTraversal(node.left);

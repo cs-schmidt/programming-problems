@@ -1,14 +1,11 @@
-// Problem 1768: Merge Strings Alternately
-
 /**
- * Constraints:
+ * Problem 1768: Merge Strings Alternately
  *
- * 1) 1 <= word1.length, word2.length <= 100
- * 2) word1 and word2 consist of lowercase English letters.
+ * Constraints:
+ *  1. 1 <= word1.length, word2.length <= 100
+ *  2. word1 and word2 consist of lowercase English letters.
  *
  */
-
-// TODO: Improve solution even further.
 
 function mergeAlternately(str1: string, str2: string): string {
   var result: string = '';

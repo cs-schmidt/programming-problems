@@ -1,11 +1,10 @@
-// Problem 1431: Kids With the Greatest Number of Candies
-
 /**
- * Constraints:
+ * Problem 1431: Kids With the Greatest Number of Candies
  *
- * 1) 2 <= n <= 100
- * 2) 1 <= candies[i] <= 100
- * 3) 1 <= extraCandies <= 50
+ * Constraints:
+ *  1. 2 <= n <= 100
+ *  2. 1 <= candies[i] <= 100
+ *  3. 1 <= extraCandies <= 50
  */
 
 function kidsWithCandies(candies: number[], extraCandies: number): boolean[] {

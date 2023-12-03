@@ -1,19 +1,11 @@
-// Problem 205: Isomorphic Strings
-
 /**
+ * Problem 205: Isomorphic Strings
+ *
  * Constraints:
  *
- * 1) 1 <= s.length <= 5 * 10^4
- * 2) t.length == s.length
- * 3) s and t consist of any valid ascii character.
- */
-
-// TODO: Modify this solution.
-
-/**
- * 1) Think about a data structure to store the values of `mappings` and the
- *    set `mappedTo` in the same memory space. This will reduce th space
- *    complexity.
+ *  1. 1 <= s.length <= 5 * 10^4
+ *  2. t.length == s.length
+ *  3. s and t consist of any valid ascii character.
  */
 
 function isIsomorphic(s: string, t: string): boolean {

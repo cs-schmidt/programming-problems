@@ -2,12 +2,10 @@
 Problem 1493: Longest Subarray of 1's After Deleting One Element
 
 Constraints:
-
  1. 1 <= nums.length <= 10^5
  2. nums[i] is either 0 or 1
 """
 
-# TODO: Finish this problem.
 class Solution:
     def longestSubarray(self, bit_array: list[int]) -> int:
         # This procedure takes an iterative approach. The idea of each iteration is

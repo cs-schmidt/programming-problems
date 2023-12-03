@@ -1,13 +1,9 @@
-// Problem 649: Dota2 Senate
-
-// TODO: Improve solution
-
 /**
+ * Problem 649: Dota2 Senate
+ *
  * Constraints
- *
- * 1) 1 <= senate.length <= 10^4
- * 2) senate[i] is either 'R' or 'D'.
- *
+ *  1. 1 <= senate.length <= 10^4
+ *  2. senate[i] is either 'R' or 'D'.
  */
 
 /**

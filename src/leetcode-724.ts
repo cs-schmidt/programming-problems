@@ -1,12 +1,9 @@
-// Problem 724: Find Pivot Index
-// NOTE: Popular question.
-
 /**
+ * Problem 724: Find Pivot Index
+ *
  * Constraints:
- *
- * 1) 1 <= nums.length <= 10^4
- * 2) -1000 <= nums[i] <= 1000
- *
+ *  1. 1 <= nums.length <= 10^4
+ *  2. -1000 <= nums[i] <= 1000
  */
 
 function pivotIndex(nums: number[]): number {

@@ -1,11 +1,10 @@
-// Problem 2390: Remove Stars From a String
-
 /**
- * Constraints
+ * Problem 2390: Remove Stars From a String
  *
- * 1) 1 <= s.length <= 10^5
- * 2) s consists of lowercase English letters and stars *.
- * 3) The operation described in the problem can be performed on s.
+ * Constraints
+ *  1. 1 <= s.length <= 10^5
+ *  2. s consists of lowercase English letters and stars *.
+ *  3. The operation described in the problem can be performed on s.
  */
 
 function removeStars(s: string): string {

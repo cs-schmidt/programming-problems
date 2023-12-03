@@ -1,27 +1,21 @@
-// Problem 21: Merge Two Sorted Lists
-// NOTE: Popular question.
-// TODO: Produce further optimized version.
-
 /**
+ * Problem 21: Merge Two Sorted Lists
+ *
  * Constraints:
- *
- * 1) The number of nodes in both lists is in the range [0, 50].
- * 2) -100 <= Node.val <= 100
- * 3) Both list1 and list2 are sorted in non-decreasing order.
- *
+ *  1. The number of nodes in both lists is in the range [0, 50].
+ *  2. -100 <= Node.val <= 100
+ *  3. Both list1 and list2 are sorted in non-decreasing order.
  */
 
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     val: number
- *     next: ListNode | null
- *     constructor(val?: number, next?: ListNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.next = (next===undefined ? null : next)
- *     }
- * }
- */
+/** Definition for singly-linked list. */
+class ListNode {
+  val: number;
+  next: ListNode | null;
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
 
 function mergeTwoLists(
   list1: ListNode | null,

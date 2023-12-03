@@ -1,11 +1,9 @@
-// Problem 1328: Break a Palindrome
-
 /**
+ * Problem 1328: Break a Palindrome
+ *
  * Constraints:
- *
- * 1) 1 <= palindrome.length <= 1000
- * 2) palindrome consists of only lowercase English letters.
- *
+ *  1. 1 <= palindrome.length <= 1000
+ *  2. palindrome consists of only lowercase English letters.
  */
 
 function breakPalindrome(palindrome: string): string {

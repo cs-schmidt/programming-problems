@@ -1,27 +1,23 @@
-// Problem 876: Middle of Linked List
-// NOTE: Popular question.
-
 /**
+ * Problem 876: Middle of Linked List
+ *
  * Constraints:
  *
- * 1) The number of nodes in the list is in the range [1, 100].
- * 2) 1 <= Node.val <= 100.
- *
+ * 1. The number of nodes in the list is in the range [1, 100].
+ * 2. 1 <= Node.val <= 100.
  */
 
-/**
- * Definition for singly-linked list.
- * class ListNode {
- *     val: number
- *     next: ListNode | null
- *     constructor(val?: number, next?: ListNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.next = (next===undefined ? null : next)
- *     }
- * }
- */
+/** Definition for singly-linked list. */
+class ListNode {
+  val: number;
+  next: ListNode | null;
 
-// *** First Submission ***
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = val === undefined ? 0 : val;
+    this.next = val === undefined ? null : next;
+  }
+}
+
 function middleNode(head: ListNode | null): ListNode | null {
   // We start by initializing key variables. Here `mNode` and `mIndex` are used
   // to track the current middle node and middle index respectively. Variables

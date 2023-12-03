@@ -6,6 +6,7 @@
  *  2. -100 <= Node.val <= 100.
  */
 
+/** Definition of a binary tree node. */
 class TreeNode {
   val: number;
   left: TreeNode | null;
@@ -22,7 +23,7 @@ class TreeNode {
   }
 }
 
-// Custom Types
+/** An ordered pair containing a node and associated index number. */
 type IndexedNode = [TreeNode, number];
 
 /**

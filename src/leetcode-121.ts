@@ -1,16 +1,11 @@
-// Problem 121: Best Time to Buy and Sell a Stock
-// NOTE: Popular question
-// TODO: Produce further optimized version.
-
 /**
+ * Problem 121: Best Time to Buy and Sell a Stock
+ *
  * Constraints:
- *
- * 1) 1 <= prices.length <= 10^5
- * 2) 0 <= prices[i] <= 10^4
- *
+ *  1. 1 <= prices.length <= 10^5
+ *  2. 0 <= prices[i] <= 10^4
  */
 
-// *** First Submission ***
 function maxProfit(prices: number[]): number {
   // Initialize two variables `minEntry` and `profit`, where the former tracks
   // the minimum entry price encountered as we traverse `prices`, and the latter

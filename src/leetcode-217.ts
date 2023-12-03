@@ -1,10 +1,9 @@
-// Problem 217: Contains Duplicates
-
 /**
- * Constraints:
+ * Problem 217: Contains Duplicates
  *
- * 1) 1 <= nums.length <= 10^5
- * 2) -10^9 <= nums[i] <= 10^9
+ * Constraints:
+ *  1. 1 <= nums.length <= 10^5
+ *  2. -10^9 <= nums[i] <= 10^9
  */
 
 function containsDuplicate(nums: number[]): boolean {

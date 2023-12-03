@@ -1,13 +1,10 @@
-// Problem 392: Is Subsequence
-// TODO: Complete the follow up for this problem.
-
 /**
+ * Problem 392: Is Subsequence
+ *
  * Constraints:
- *
- * 1) 0 <= s.length <= 100
- * 2) 0 <= t.length <= 10^4
- * 3) s and t consist only of lowercase English letters.
- *
+ *  1. 0 <= s.length <= 100
+ *  2. 0 <= t.length <= 10^4
+ *  3. s and t consist only of lowercase English letters.
  */
 
 function isSubsequence(s: string, t: string): boolean {

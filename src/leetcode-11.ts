@@ -1,12 +1,10 @@
-// Problem 11: Container With Most Water
-
 /**
+ * Problem 11: Container With Most Water
+ *
  * Constraints:
- *
- * 1) n == height.length
- * 2) 2 <= n <= 10^5
- * 3) 0 <= height[i] <= 10^4
- *
+ *  1. n == height.length
+ *  2. 2 <= n <= 10^5
+ *  3. 0 <= height[i] <= 10^4
  */
 
 function maxArea(height: number[]): number {

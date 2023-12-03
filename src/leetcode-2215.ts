@@ -1,10 +1,9 @@
-// Problem 2215: Find the Difference of Two Arrays
-
 /**
- *  Constraints:
+ * Problem 2215: Find the Difference of Two Arrays
  *
- * 1) 1 <= nums1.length, nums2.length <= 1000
- * 2) -1000 <= nums1[i], nums2[i] <= 1000
+ * Constraints:
+ *  1. 1 <= nums1.length, nums2.length <= 1000
+ *  2. -1000 <= nums1[i], nums2[i] <= 1000
  */
 
 function findDifference(nums1: number[], nums2: number[]): number[][] {

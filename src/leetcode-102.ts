@@ -1,16 +1,12 @@
-// Problem 102: Binary Tree Order Traversal
-// NOTE: Popular question
-// TODO: Produce further optimized version.
-
 /**
+ * Problem 102: Binary Tree Order Traversal
+ *
  * Constraints:
- *
- * 1) The number of nodes in the tree is in the range [0, 2000].
- * 2) -1000 <= Node.val <= 1000.
- *
+ *  1. The number of nodes in the tree is in the range [0, 2000].
+ *  2. -1000 <= Node.val <= 1000.
  */
 
-// Definition for a binary tree node.
+/** Definition for a binary tree node. */
 class TreeNode {
   val: number;
   left: TreeNode | null;
@@ -22,18 +18,12 @@ class TreeNode {
   }
 }
 
-/*
-   Solutions:
-   ========================================================================== */
-
-// Solution 1: recursive algorithm
 function levelOrder(root: TreeNode | null): number[][] {
   const result: number[][] = [];
   appendData(root, 0);
   return result;
 
   // *******************************************************
-
   function appendData(node: TreeNode | null, level: number) {
     if (!node) return;
     if (!(result[level] instanceof Array)) result[level] = [];

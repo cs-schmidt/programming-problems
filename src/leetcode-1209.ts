@@ -1,12 +1,10 @@
-// Problem 1209: Remove All Adjacent Duplicates in String II
-
 /**
+ * Problem 1209: Remove All Adjacent Duplicates in String II
+ *
  * Constraints:
- *
- * 1) 1 <= s.length <= 10^5
- * 2) 2 <= k <= 10^4
- * 3) s only contains lowercase English letters.
- *
+ *  1. 1 <= s.length <= 10^5
+ *  2. 2 <= k <= 10^4
+ *  3. s only contains lowercase English letters.
  */
 
 // TODO: Enhance this solution.

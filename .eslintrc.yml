@@ -43,3 +43,5 @@ rules:
     - 'off'
   no-param-reassign:
     - 'warn'
+  max-classes-per-file:
+    - 'off'

@@ -37,55 +37,43 @@ function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
   let tree2Node: TreeNode | null = root2;
   let tree1LeafVal: number | null = null;
   let tree2LeafVal: number | null = null;
-  const iter = 0;
 
-  while (
-    !(
-      (tree1Node !== null && tree1History.length !== 0) ||
-      (tree2Node !== null && tree2History.length !== 0)
-    )
-  ) {
-    // Preform In-order DF traversal on left tree until a leaf is reached.
-    while ((tree1Node !== null || tree1History.length !== 0) && !tree1LeafVal) {
-      // Traverse as far left as possible until `null` is reached.
+  do {
+    // Preform in-order DF traversal on tree 1 until a leaf value is found.
+    while ((tree1Node !== null || tree1History.length > 0) && !tree1LeafVal) {
+      // Traverse down the leftwards path of nodes.
       while (tree1Node !== null) {
         tree1History.push(tree1Node);
         tree1Node = tree1Node.left;
       }
-      // We know that `tree1Node` is `null` now. And, The most recent node in
-      // `leftTreeHistory` will either have a non-null right child, or it won't.
-      if (tree1History.at(-1).right) tree1Node = tree1History.pop().right;
-      else {
-        // We know the top of `tree1History` is a leaf node.
+      // Now `tree1Node` is null and the top of `tree1History` will either have
+      // a right child node, or will itself be a leaf node.
+      if (!tree1History.at(-1).left && !tree1History.at(-1).right)
         tree1LeafVal = tree1History.at(-1).val;
-        tree1Node = tree1History.pop().right;
-      }
+      tree1Node = tree1History.pop().right;
     }
 
-    // Preform In-order DF traversal on right tree until a leaf is reached.
-    while ((tree2Node !== null || tree2History.length !== 0) && !tree2LeafVal) {
-      // Traverse as far left as possible until `null` is reached.
+    // Preform in-order DF traversal on tree 2 until a leaf value is found.
+    while ((tree2Node !== null || tree2History.length > 0) && !tree2LeafVal) {
+      // Traverse down the leftwards path of nodes.
       while (tree2Node !== null) {
         tree2History.push(tree2Node);
         tree2Node = tree2Node.left;
       }
-      // We know that `tree2Node` is `null` now. And, The most recent node in
-      // `rightTreeHistory` will either have a non-null right child, or it
-      // won't.
-      if (tree2History.at(-1).right) tree2Node = tree2History.pop().right;
-      else {
-        // We know the top of `tree2History` is a leaf node.
+      // Now `tree2Node` is null and the top of `tree2History` will either have
+      // a right child node, or will itself be a leaf node.
+      if (!tree2History.at(-1).left && !tree2History.at(-1).right)
         tree2LeafVal = tree2History.at(-1).val;
-        tree2Node = tree2History.pop().right;
-      }
+      tree2Node = tree2History.pop().right;
     }
 
-    // Compare the left tree and right tree leaf node values.
+    // Compare leaf node values from both trees.
     if (tree1LeafVal !== tree2LeafVal) return false;
 
+    // Reset leaf node values.
     tree1LeafVal = null;
     tree2LeafVal = null;
-  }
+  } while (tree1History.length > 0 || tree2History.length > 0);
 
   // Returns true if a failure condition wasn't achieved.
   return true;

@@ -20,34 +20,23 @@
  * Complexity: O(log(n)) time and O(log(n)) + O(1) space.
  */
 function guessNumber(n: number): number {
+  let mid = 0; // save space by caching `mid` variable used by `findInRange()`.
+
   return findInRange(1, n);
 
   // Internal Procedures:
   // =================================================================
   /** Attempts the find the guess number `k` between `low` and `high`. */
   function findInRange(low: number, high: number): number {
-    // Base Case 1: There's no middle number between the bounds of the range.
-    if (high < low) return 0;
+    mid = Math.floor((high + low) / 2);
 
-    const mid = Math.floor((high + low) / 2);
-
-    // Base Case 2: The middle number in the range is the correct guess.
+    // Base Case: The middle number in the range is the correct guess.
     if (guess(mid) === 0) return mid;
 
-    // When `mid` is above the correct number, check middle guesses in half
-    // ranges between `low` and `mid`.
-    if (guess(mid) === -1) {
-      return (
-        findInRange(low, Math.floor((low + mid - 1) / 2)) ||
-        findInRange(Math.floor((low + mid - 1) / 2) + 1, mid - 1)
-      );
-    }
+    // If `mid` is greater than the correct number.
+    if (guess(mid) === -1) return findInRange(low, mid - 1);
 
-    // Otherwise, we know `mid` is below the correct number, so check middle
-    // guesses in half ranges between `mid` and `high`.
-    return (
-      findInRange(mid + 1, Math.floor((mid + high + 1) / 2)) ||
-      findInRange(Math.floor((mid + high + 1) / 2) + 1, high)
-    );
+    // Otherwise, `mid` is less than the correct number.
+    return findInRange(mid + 1, high);
   }
 }

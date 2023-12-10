@@ -14,25 +14,18 @@
  * Complexity: O(n) time and O(1) auxiliary space.
  */
 function moveZeroes(nums: number[]): void {
-  let zeroIndex = nums.indexOf(0);
-  let nonZeroIndex = zeroIndex + 1;
+  let zeroIdx = nums.indexOf(0);
+  let nonZeroIdx = zeroIdx;
 
-  while (nums[nonZeroIndex] === 0 && nonZeroIndex < nums.length)
-    nonZeroIndex += 1;
+  while (nums[nonZeroIdx] === 0 && nonZeroIdx < nums.length) nonZeroIdx += 1;
 
-  if (zeroIndex === -1 || nonZeroIndex === nums.length) return;
+  if (zeroIdx === -1 || nonZeroIdx === nums.length) return;
 
-  while (nums[zeroIndex] === 0 && nonZeroIndex < nums.length) {
-    const nonZeroVal = nums[nonZeroIndex];
+  while (nonZeroIdx < nums.length) {
+    nums[zeroIdx] = nums[nonZeroIdx];
+    nums[nonZeroIdx] = 0;
 
-    nums[nonZeroIndex] = 0;
-    nums[zeroIndex] = nonZeroVal;
-
-    while (nums[zeroIndex] !== 0 && zeroIndex < nums.length) zeroIndex += 1;
-
-    nonZeroIndex = zeroIndex + 1;
-
-    while (nums[nonZeroIndex] === 0 && nonZeroIndex < nums.length)
-      nonZeroIndex += 1;
+    while (nums[zeroIdx] !== 0 && zeroIdx < nums.length) zeroIdx += 1;
+    while (nums[nonZeroIdx] === 0 && nonZeroIdx < nums.length) nonZeroIdx += 1;
   }
 }

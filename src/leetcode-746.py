@@ -6,12 +6,19 @@ Constraints:
  2. 0 <= cost[i] <= 999
 """
 
+
 class Solution:
     def minCostClimbingStairs(self, stepCosts: list[int]) -> int:
         """
-        <solution type>
+        Dynamic Programming: Iterative and Imperative
 
-        Complexity: <time complexity> and <space complexity>.
+        Complexity: O(n) time and O(1) auxiliary space.
         """
+        costParts: list[int] = [stepCosts[-2], stepCosts[-1]]
 
-        return 0
+        for i in range(len(stepCosts) - 3, -1, -1):
+            stepMin = stepCosts[i] + min(costParts)
+            costParts[1] = costParts[0]
+            costParts[0] = stepMin
+
+        return min(costParts)

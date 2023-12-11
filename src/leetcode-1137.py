@@ -10,20 +10,22 @@ Constraints:
 class Solution:
     def tribonacci(self, n: int) -> int:
         """
-        Tree Recursion Solution
+        Iterative and Imperative Solution
 
-        Complexity: <time complexity> and <space complexity>.
+        Complexity: O(n) time and O(n) auxiliary space.
         """
+        # Maps indexes to their associated tribonnaci number.
+        tribonnaciNums: List[int] = [0, 1, 1]
 
-        # Base Cases:
-        if n == 0:
-            return 0
-        if n == 1:
-            return 1
-        if n == 2:
-            return 1
+        if n < 3:
+            return tribonnaciNums[n]
 
-        # Recursive Case:
-        return (self.tribonacci(n - 1) + 
-                self.tribonacci(n - 2) + 
-                self.tribonacci(n - 3))
+        # Populates tribonnaciNums up to the nth tribonnaci number. 
+        while len(tribonnaciNums) < n + 1:
+            tribonnaciNums.append(
+                tribonnaciNums[len(tribonnaciNums) - 1]
+                + tribonnaciNums[len(tribonnaciNums) - 2]
+                + tribonnaciNums[len(tribonnaciNums) - 3]
+            )
+
+        return tribonnaciNums[n]

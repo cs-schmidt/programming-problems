@@ -12,20 +12,18 @@ class Solution:
         """
         Iterative and Imperative Solution
 
-        Complexity: O(n) time and O(n) auxiliary space.
+        Complexity: O(n) time and O(1) auxiliary space.
         """
-        # Maps indexes to their associated tribonnaci number.
-        tribonnaciNums: List[int] = [0, 1, 1]
+        # Contains the components that sum to the current tribonacci number.
+        tribNumParts: list[int] = [0, 1, 1]
 
         if n < 3:
-            return tribonnaciNums[n]
+            return tribNumParts[n]
 
-        # Populates tribonnaciNums up to the nth tribonnaci number. 
-        while len(tribonnaciNums) < n + 1:
-            tribonnaciNums.append(
-                tribonnaciNums[len(tribonnaciNums) - 1]
-                + tribonnaciNums[len(tribonnaciNums) - 2]
-                + tribonnaciNums[len(tribonnaciNums) - 3]
-            )
+        for _ in range(n - 2):
+            nextTribNum = sum(tribNumParts)
+            tribNumParts[0] = tribNumParts[1]
+            tribNumParts[1] = tribNumParts[2]
+            tribNumParts[2] = nextTribNum
 
-        return tribonnaciNums[n]
+        return tribNumParts[-1]

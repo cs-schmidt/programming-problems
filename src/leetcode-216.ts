@@ -15,15 +15,34 @@
  */
 function combinationSum3(k: number, n: number): number[][] {
   let max = 9;
+  let remainder = n;
   const partition: number[] = [];
   const result: number[][] = [];
 
-  // XXX: Does it stop when partition is full?
-  while (naturalSum(k) <= n && n >= k * max - naturalSum(k - 1)) {
+  // The process goes through each combination of the ways to select `k`
+  // distinct members from {9, 8, ..., 1}, and stores each combination every
+  // combination who's components sum to make `n`. To get every combination of
+  // `k` selections on {9, 8, ..., 1} we go in largest to smallest order.
+
+  // Repeatedly test for the solution existence condition, and add the next
+  // number to `partition` while it's satisfied.
+  while (
+    naturalSum(k) <= remainder &&
+    remainder >= k * max - naturalSum(k - 1)
+  ) {
     partition.push(max);
+    remainder -= max;
     max -= 1;
     k -= 1;
   }
+
+  // There are 3 possibilities at this point:
+  //  1. remainder < 0: the current number is too big.
+  //  2. remainder == 0
+  //  3. remainder > 0
+
+  // There's a point in time where I run out of choices `k`, or `remainder` <= 0
+  // before we've made all `k` choices.
 
   return result;
 }

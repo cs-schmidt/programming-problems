@@ -8,16 +8,26 @@ Constraints:
     only once.
 """
 
+from functools import reduce
+from operator import xor
+
+
 class Solution:
     def singleNumber(self, nums: list[int]) -> int:
         """
-        <solution type>
+        Iterative and Imperative Solution
 
-        <description>
+        The solution exploits the commutative property of the bitwise XOR
+        operator. Since XOR is commutative, the output of "XORing" all the
+        elements of `nums` together will be the same regardless of the order.
+        The same number "XORed" with itself is 0, so you can imagine rearranging
+        all the elements of `nums` so that equal values are beside each other.
+        "XORing" all these pairs of equal values cancels out, and the "single
+        number" in `nums` (the one which does not occur twice) will be "XORed"
+        with 0, so it just equals itself. Therefore, the output of "XORing" all
+        the elements together will equal the single number, and we return it as
+        the result.
 
         Complexity: O(n) time and O(1) auxiliary space.
         """
-        sumOfDoubles = 0
-        sum = 0
-
-        return sumOfDoubles - sum
+        return reduce(xor, nums)

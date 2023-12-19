@@ -21,23 +21,23 @@ class TreeNode:
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
         """
-        <solution type>
+        Iterative and Imperative Solution
 
-        <description>
-
-        Complexity: <time complexity> and <space complexity>.
+        Complexity: O(nodes) time and O(height) auxiliary space.
         """
         result: int = 0
-        pathHistory: list[TreeNode] = []
+        pathHistory: list[tuple[TreeNode, int]] = []
         node: TreeNode = root
-        pathMax = root.val
-
-        if node.val >= pathMax: result += 1
+        pathMax = node.val
 
         while node != None or len(pathHistory) > 0:
             while node != None:
-                pathHistory.append(node)
+                if node.val >= pathMax:
+                    pathMax = node.val
+                    result += 1
+                pathHistory.append((node, pathMax))
                 node = node.left
-            node = node.pop().right
+            pathMax = pathHistory[-1][1]
+            node = pathHistory.pop()[0].right
 
         return result

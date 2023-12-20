@@ -16,6 +16,10 @@ extends:
 plugins:
   - '@typescript-eslint'
 rules:
+  no-continue:
+    - 'off'
+  no-bitwise:
+    - 'off'
   no-restricted-syntax:
     - 'off'
   lines-between-class-members:

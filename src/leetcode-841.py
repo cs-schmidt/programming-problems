@@ -10,17 +10,27 @@ Constraints:
  6. All the values of rooms[i] are unique.
 """
 
+from collections import deque
+
 
 class Solution:
     def canVisitAllRooms(self, rooms: list[list[int]]) -> bool:
         """
         Iterative and Imperative Solution
 
-        Complexity: O(n) time and O(height) auxiliary space.
+        Complexity: O(n) time and O(width) + O(1) auxiliary space.
         """
-        # Perform DF traversal until a depth of `rooms.length` is acheived.
-        visitedRooms: set[int] = set()
-        maxDepth: int = 0
-        traversalDepth: int = 0
+        level: int = 0
+        roomQueue: deque[list[int]] = deque([rooms[0]])
+        visitedRooms: set[int] = set([0])
 
-        return True
+        while roomQueue and len(visitedRooms) < len(rooms):
+            for i in range(len(roomQueue)):
+                currentRoom: list[int] = roomQueue.popleft()
+                for roomKey in currentRoom:
+                    if roomKey not in visitedRooms:
+                        roomQueue.append(rooms[roomKey])
+                        visitedRooms.add(roomKey)
+            if len(roomQueue) > 0: level += 1
+
+        return len(visitedRooms) == len(rooms)

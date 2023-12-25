@@ -10,19 +10,29 @@
 /**
  * Iterative and Imperative Solution
  *
- * Complexity: <time complexity> and <space complexity>.
+ * Complexity: O(n*log(n)) time and O(1) auxiliary space.
  */
 
 /**
- * Calculates the minimum number of intervals must be removed to get a list on
- * non-overlapping intervals.
- * @param {number[][]} intervals - An array of intervals.
+ * @param {number[][]} intervals
  * @return {number}
  */
 function eraseOverlapIntervals(intervals) {
-  const result = 0;
+  let result = 0;
 
-  // Update `result` to the number of min removals from `intervals`.
+  // O(n*log(n)) time
+  intervals.sort(function toAscending(interval1, interval2) {
+    if (interval1[1] > interval2[1]) return 1;
+    if (interval1[1] === interval2[1]) return 0;
+    return -1;
+  });
+
+  // O(n) time
+  let lastInterval = intervals[0];
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i][0] < lastInterval[1]) result += 1;
+    else lastInterval = intervals[i];
+  }
 
   return result;
 }

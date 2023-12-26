@@ -12,27 +12,28 @@ class Solution:
         """
         Iterative and Imperative Solution
 
-        Complexity: O(word_length) time and O(word_length) auxilary space.
+        Complexity: O(n*log(n)) time and O(n) auxilary space (where n is equal
+                    to `len(word1)` and `len(word2)`).
         """
-        # We can preform only two operations on a string:
-        #
-        #  1. swapChars(i,j): Swap the position of two characters which *exist*
-        #     in the string.
-        #  2. swapCharGroups(a,b): Transform every occurrence of one *existing*
-        #     character into another *existing* character, and do the same with
-        #     the other character. For example, doing this will "a" and "b"
-        #     across a string will swap all a's with b's and b's with a's.
-        #
-        # We return `True` if these operations alone can make the strings
-        # identical and `False` otherwise.
-
-        if len(word1) != len(word2): return False
-
         # Regardless of operation 1 and operation 2, a string will always
         # maintain the same number of distinct characters and multiplicities
         # across each: that's the invariant here.
 
-        word1CharFrequencies: list[int] = []
-        word2CharFrequencies: list[int] = []
+        if len(word1) != len(word2):
+            return False
 
-        return word1CharFrequencies == word2CharFrequencies
+        word1CharFrequencies: dict = {}
+        word2CharFrequencies: dict = {}
+        for i in range(len(word1)):
+            word1CharFrequencies[word1[i]] = word1CharFrequencies.get(word1[i], 0) + 1
+            word2CharFrequencies[word2[i]] = word2CharFrequencies.get(word2[i], 0) + 1
+
+        frequencies1: list[int] = list(word1CharFrequencies.values())
+        frequencies2: list[int] = list(word2CharFrequencies.values())
+        frequencies1.sort()
+        frequencies2.sort()
+
+        for freq1, freq2 in zip(frequencies1, frequencies2):
+            if freq1 != freq2:
+                return False
+        return True

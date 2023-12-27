@@ -12,6 +12,7 @@ from typing import Optional
 
 class TreeNode:
     """Represents a binary tree node."""
+
     def __init__(
         self,
         val: int = 0,
@@ -22,28 +23,43 @@ class TreeNode:
         self.left = left
         self.right = right
 
+# NOTE: Strategy doesn't work because of double counting.
 
 class Solution:
-    def pathSum(self, root: TreeNode, targetSum: int) -> int:
+    def pathSum(self, root: Optional["TreeNode"], targetSum: int) -> int:
         """
         Iterative and Imperative Solution
 
-        Complexity: <time complexity> and <space complexity>.
+        Complexity: O(nodes) time and O(height) auxiliary space.
         """
-        # Within the tree defined by 'root' and all it's descendants, every path
-        # from  from 'root' to one of its leaf nodes (going only from parent to
-        # child) can be represented by an array of nodes. I have to get the
-        # number of contiguous sequences of elements in every array which sums
-        # to 'targetSum'.
-        # - Probably using a depth-first traversal strategy.
-
-        path_history: list[TreeNode] = []
+        result: int = 0
         node: TreeNode = root
+        path: list[TreeNode] = []
 
-        # Preform a depth-first traversal which retains the path from 'root' to
-        # its leaf nodes in 'path_history'.
+        while node or len(path):
+            # Preform preorder depth-first traversal to get 'path' from 'root'
+            # to the next leaf node.
+            while node:
+                path.append(node)
+                node = node.left if node.left else node.right
+            print(f"Full Path: {[node.val for node in path]}")
 
-        # TODO: Write some code which finds the number of contiguous sequences
-        #       that sum to produce 'targetSum'.
+            # Find the number of subbarrays which sum to 'targetSum' in 'path'.
+            for i in range(len(path)):
+                    sums: int = 0
+                    for j in range(i, len(path)):
+                        sums += path[j].val
+                        print(sums)
+                        if sums == targetSum: result += 1
 
-        return 0
+            # Traverse backwards through the 'path' to find the last node with
+            # an unexplored right child.
+            while len(path) > 0:
+                node = path.pop()
+                if len(path) and path[-1].right and path[-1].right is not node:
+                    node = path[-1].right
+                    break
+            if not len(path):
+                break
+
+        return result

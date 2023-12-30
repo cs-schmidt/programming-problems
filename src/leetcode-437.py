@@ -8,6 +8,7 @@ Constraints:
 """
 
 from typing import Optional
+from functools import reduce
 
 
 class TreeNode:
@@ -23,43 +24,36 @@ class TreeNode:
         self.left = left
         self.right = right
 
-# NOTE: Strategy doesn't work because of double counting.
 
 class Solution:
-    def pathSum(self, root: Optional["TreeNode"], targetSum: int) -> int:
+    def pathSum(self, root: Optional["TreeNode"], target_sum: int) -> int:
         """
         Iterative and Imperative Solution
 
-        Complexity: O(nodes) time and O(height) auxiliary space.
+        Complexity: O(n^2) time and O(h) auxiliary space.
         """
         result: int = 0
         node: TreeNode = root
         path: list[TreeNode] = []
+        backtrack_points: list[int] = []
 
-        while node or len(path):
-            # Preform preorder depth-first traversal to get 'path' from 'root'
-            # to the next leaf node.
+        # Preforms DF traversal, going to each leaf node in left-to-right order.
+        while node or backtrack_points:
+            # Traverses to the ith leaf node (in left-to-right order).
             while node:
                 path.append(node)
+                if node.left and node.right:  backtrack_points.append(len(path))
                 node = node.left if node.left else node.right
-            print(f"Full Path: {[node.val for node in path]}")
-
-            # Find the number of subbarrays which sum to 'targetSum' in 'path'.
-            for i in range(len(path)):
-                    sums: int = 0
-                    for j in range(i, len(path)):
-                        sums += path[j].val
-                        print(sums)
-                        if sums == targetSum: result += 1
-
-            # Traverse backwards through the 'path' to find the last node with
-            # an unexplored right child.
-            while len(path) > 0:
-                node = path.pop()
-                if len(path) and path[-1].right and path[-1].right is not node:
-                    node = path[-1].right
-                    break
-            if not len(path):
-                break
+                path_val = reduce(lambda sum, node: sum + node.val, path, 0)
+                if path_val == target_sum: result += 1
+                for i in range(len(path) - 1):
+                    path_val -= path[i].val
+                    result = result + 1 if path_val == target_sum else result
+            
+            # Goes to the next possible downwards path to find the (i+1)th leaf
+            # node in the next iteration.
+            if len(backtrack_points) > 0:
+                path = path[0 : backtrack_points.pop()]
+                node = path[-1].right
 
         return result

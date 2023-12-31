@@ -9,12 +9,19 @@
 
 
 class Solution:
-    def equalPairs(self, grid: list[list[int]]):
+    def equalPairs(self, grid: list[list[int]]) -> int:
         """
-        <solution type>
+        Iterative and Imperative Solution
 
-        Complexity: <time complexity> and <space complexity>.
+        Complexity: O(n^2) complexity and O(n) auxiliary space.
         """
         result = 0
-        
+
+        for rowIdx in range(len(grid)):
+            row = grid[rowIdx]
+
+            for colIdx in range(len(grid[0])):
+                col = list(map(lambda row: row[colIdx], grid))
+                result += 1 if row == col else 0
+
         return result

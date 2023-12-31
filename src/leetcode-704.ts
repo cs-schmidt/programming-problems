@@ -9,7 +9,7 @@
  */
 
 function search(nums: number[], target: number): number {
-  let start: number = 0;
+  let start = 0;
   let end: number = nums.length - 1;
 
   while (start <= end) {

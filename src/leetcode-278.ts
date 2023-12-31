@@ -25,7 +25,7 @@ function solution(isBadVersion: (v: number) => boolean) {
     // represents the start of the partition we're searching at each iteration,
     // and `highV` represents the end of the partition we're searching at each
     // iteration.
-    let lowV: number = 1;
+    let lowV = 1;
     let highV: number = n;
 
     // Start the binary search iterations process.

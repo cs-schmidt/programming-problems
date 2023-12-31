@@ -24,9 +24,9 @@ function leftMostColumnWithOne(binaryMatrix: BinaryMatrix): number {
   // ceasing once I know that there's no further left-most column containing a
   // 1.
   const [rows, cols] = binaryMatrix.dimensions();
-  let currRow: number = 0;
+  let currRow = 0;
   let maxCol: number = cols - 1;
-  let found: boolean = false;
+  let found = false;
 
   // Iterate through the rows of `binaryMatrix`.
   while (currRow < rows && maxCol !== 0) {
@@ -34,7 +34,7 @@ function leftMostColumnWithOne(binaryMatrix: BinaryMatrix): number {
     // This version of binary search will cease when we find the left-most 1 in
     // the current row or when we determine that we found a more left-ward 1 in
     // a previously searched row.
-    let lowIdx: number = 0;
+    let lowIdx = 0;
     let highIdx: number = maxCol;
     while (lowIdx < highIdx) {
       const midIdx: number = Math.floor((highIdx + lowIdx) / 2);

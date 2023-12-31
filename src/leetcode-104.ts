@@ -9,11 +9,13 @@
 /** Definition of a binary tree node. */
 class TreeNode {
   val: number;
+
   left: TreeNode | null;
+
   right: TreeNode | null;
 
   constructor(
-    val: number = 0,
+    val = 0,
     left: TreeNode | null = null,
     right: TreeNode | null = null
   ) {
@@ -38,8 +40,8 @@ class TreeNode {
 function maxDepth(root: TreeNode | null): number {
   if (!root) return 0;
 
-  var result = 0;
-  var traversalDepth = 0;
+  let result = 0;
+  let traversalDepth = 0;
   recursivePostTraversal(root);
 
   return result;

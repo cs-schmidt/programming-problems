@@ -1,53 +1,69 @@
-# ESLint Configuration
-
 root: true
-env:
-  es2022: true
-parser: '@typescript-eslint/parser'
-parserOptions:
-  ecmaVersion: 13 # v. 13 equals ES2022 (should match tsconfig's `target` option)
-  project: './tsconfig.json'
-  sourceType: 'module'
-extends:
-  - 'airbnb-base'
-  - 'plugin:@typescript-eslint/recommended'
-  - 'plugin:@typescript-eslint/recommended-requiring-type-checking'
-  - 'prettier'
-plugins:
-  - '@typescript-eslint'
-rules:
-  no-continue:
-    - 'off'
-  no-bitwise:
-    - 'off'
-  no-restricted-syntax:
-    - 'off'
-  lines-between-class-members:
-    - 'off'
-  '@typescript-eslint/lines-between-class-members':
-    - 'off'
-  no-use-before-define: off
-  '@typescript-eslint/no-use-before-define':
-    - 'error'
-    - functions: false
-  '@typescript-eslint/no-inferrable-types':
-    - 'off'
-  consistent-return:
-    - 'warn'
-  prefer-template:
-    - 'warn'
-  no-plusplus:
-    - 'error'
-    - allowForLoopAfterthoughts: true
-  eqeqeq:
-    - 'warn'
-  no-var:
-    - 'off'
-  vars-on-top:
-    - 'off'
-  no-param-reassign:
-    - 'warn'
-  max-classes-per-file:
-    - 'off'
-  prefer-arrow-callback:
-    - 'off'
+overrides:
+  # JS-type files.
+  - files: ['src/**/*.{js,mjs,cjs}']
+    env:
+      es2022: true
+    parserOptions:
+      ecmaVersion: 'latest'
+      sourceType: 'module'
+    extends: ['airbnb-base', 'prettier']
+    rules:
+      no-unused-vars:
+        - 'warn'
+      no-plusplus:
+        - 'error'
+        - allowForLoopAfterthoughts: true
+  # TS-type files.
+  - files: ['src/**/*.{ts,mts,cts}']
+    env:
+      es2022: true
+    parser: '@typescript-eslint/parser'
+    parserOptions:
+      ecmaVersion: 'latest'
+      sourceType: 'module'
+      project: './tsconfig.json'
+    extends:
+      - 'airbnb-base'
+      - 'plugin:@typescript-eslint/recommended'
+      - 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+      - 'prettier'
+    plugins: ['@typescript-eslint']
+    rules:
+      no-unused-vars:
+        - 'warn'
+      '@typescript-eslint/no-inferrable-types':
+        - 'off'
+      '@typescript-eslint/lines-between-class-members':
+        - 'off'
+      no-continue:
+        - 'off'
+      no-bitwise:
+        - 'off'
+      no-restricted-syntax:
+        - 'off'
+      lines-between-class-members:
+        - 'off'
+      no-use-before-define: off
+      '@typescript-eslint/no-use-before-define':
+        - 'error'
+        - functions: false
+      consistent-return:
+        - 'warn'
+      prefer-template:
+        - 'warn'
+      no-plusplus:
+        - 'error'
+        - allowForLoopAfterthoughts: true
+      eqeqeq:
+        - 'warn'
+      no-var:
+        - 'off'
+      vars-on-top:
+        - 'off'
+      no-param-reassign:
+        - 'warn'
+      max-classes-per-file:
+        - 'off'
+      prefer-arrow-callback:
+        - 'off'

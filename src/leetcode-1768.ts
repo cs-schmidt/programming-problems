@@ -8,11 +8,11 @@
  */
 
 function mergeAlternately(str1: string, str2: string): string {
-  var result: string = '';
+  let result = '';
 
   // Iterate through the strings up to the minimum length between them (i.e.,
   // the last index they share), weaving chars from each onto the `result`.
-  var minLength: number = Math.min(str1.length, str2.length);
+  const minLength: number = Math.min(str1.length, str2.length);
   for (let i = 0; i < minLength; i++) result += str1[i] + str2[i];
 
   // Pad the `result` with the remaining elements on the longer of the two

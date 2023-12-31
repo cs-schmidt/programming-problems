@@ -11,7 +11,7 @@
 function removeDuplicates(s: string, k: number): string {
   // My approach will be iterative, traversing `s` from left to right.
   let result: string = s;
-  let i: number = 0;
+  let i = 0;
   let j: number;
 
   while (i <= result.length - k) {

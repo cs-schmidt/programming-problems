@@ -15,8 +15,8 @@ function isSubsequence(s: string, t: string): boolean {
   // We know `s` is a subsequence of `t` when an ordered traversal over `t` is
   // able to "spell" `s`. We can keep track of the indexes we were able to spell
   //  up to in `s` as we traverse `t`: `sIndex` and `tIndex`.
-  let sIndex: number = 0;
-  let tIndex: number = 0;
+  let sIndex = 0;
+  let tIndex = 0;
 
   // We continue to traverse `t` while it we haven't reached the end or the
   // remaining characters to check in `t` are not less than the remaining

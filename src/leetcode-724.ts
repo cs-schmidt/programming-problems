@@ -7,8 +7,8 @@
  */
 
 function pivotIndex(nums: number[]): number {
-  let lSum: number = 0;
-  let rSum: number = 0;
+  let lSum = 0;
+  let rSum = 0;
 
   for (let i = nums.length - 1; i > 0; i--) rSum += nums[i];
 

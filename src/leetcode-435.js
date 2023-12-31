@@ -21,7 +21,7 @@ function eraseOverlapIntervals(intervals) {
   let result = 0;
 
   // O(n*log(n)) time
-  intervals.sort(function toAscending(interval1, interval2) {
+  intervals.sort((interval1, interval2) => {
     if (interval1[1] > interval2[1]) return 1;
     if (interval1[1] === interval2[1]) return 0;
     return -1;

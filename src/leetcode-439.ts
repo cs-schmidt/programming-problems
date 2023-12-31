@@ -17,15 +17,15 @@ function parseTernary(expr: string): string {
   // it's matching colon ":", and evalute the boolean in the condition spot;
   // we'll restrict the `lEdge` and `rEdge` to reflect the next ternary
   // expression we have to evaluate, deeper within.
-  let lEdge: number = 0;
+  let lEdge = 0;
   let rEdge: number = expr.length - 1;
   while (rEdge - lEdge + 1 >= 5) {
     // Inside this loop we know that `lEdge` and `rEdge` cover a ternary
     // expression since a ternary expression in this case is at least 5
     // characters long. Now we want to find the index `idx` where there is a
     // colon that matches the ternary expression's question mark.
-    let qCount: number = 1;
-    let cCount: number = 0;
+    let qCount = 1;
+    let cCount = 0;
     let idx: number = lEdge + 1; // initialized to the first position "?" exists.
     while (qCount > cCount) {
       idx += 1;

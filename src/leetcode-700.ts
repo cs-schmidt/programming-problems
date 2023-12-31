@@ -11,11 +11,13 @@
 /** Definition of a binary tree node. */
 class TreeNode {
   val: number;
+
   left: TreeNode | null;
+
   right: TreeNode | null;
 
   constructor(
-    val: number = 0,
+    val = 0,
     left: TreeNode | null = null,
     right: TreeNode | null = null
   ) {

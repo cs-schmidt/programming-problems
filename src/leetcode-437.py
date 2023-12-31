@@ -30,7 +30,7 @@ class Solution:
         """
         Iterative and Imperative Solution
 
-        Complexity: O(n^2) time and O(h) auxiliary space.
+        Complexity: <time complexity> and <space complexity>.
         """
         result: int = 0
         node: TreeNode = root

@@ -9,14 +9,12 @@
  */
 
 /**
- * <solution type>
+ * Iterative and Imperative Solution
  *
- * Complexity: <time complexity> and <space complexity>.
+ * Complexity: O(n) time and O(n) auxiliary space.
  */
 function decodeString(s: string): string {
   const result = '';
-
-  // Build `result` by parsing the string `s`.
 
   return result;
 }

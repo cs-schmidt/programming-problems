@@ -5,7 +5,7 @@ env:
   es2022: true
 parser: '@typescript-eslint/parser'
 parserOptions:
-  ecmaVersion: 13 # version 13 matches es2022 (this option should tsconfig's `target` option)
+  ecmaVersion: 13 # v. 13 equals ES2022 (should match tsconfig's `target` option)
   project: './tsconfig.json'
   sourceType: 'module'
 extends:

@@ -6,15 +6,21 @@ Constraints:
  2. -10^4 <= nums[i] <= 10^4
 """
 
-# TODO: Complete this problem.
+# NOTE: There may be a method with a modified version of the randomized-select
+#       algorithm.
+
+import heapq
 
 class Solution:
     def findKthLargest(self, nums: list[int], k: int) -> int:
         """
-        <solution type>
+        Iterative and Imperative Solution
 
-        Complexity: <time complexity> and <space complexity>.
+        Complexity: <time complexity> and O(n) auxiliary space.
         """
-        result = 0
+        heap = nums.copy()
+        heapq.heapify(heap)
 
-        return result
+        for _ in range(len(heap) - k): heapq.heappop(heap) 
+
+        return heapq.heappop(heap)

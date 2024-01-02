@@ -33,15 +33,56 @@ class TreeNode {
  * @return {TreeNode}
  */
 function lowestCommonAncestor(root, p, q) {
-  const result = root;
-  const node = root;
-  const pHistory = [];
-  const qHistory = [];
+  let node = root;
 
-  // 1. Preform DF search until 'p' or 'q' is found, and save the stack.
-  // 2. Preform DF search until the other value is found ('p' or 'q' depending
-  //    on what we found in step 1) and save the stack.
-  // 3. Find the LCA of 'p' and 'q' by comparing the stacks.
+  // Build 'leftHistory' with preorder traversal.
+  const leftStack = [];
+  while (node) {
+    while (node && node !== p && node !== q) {
+      leftStack.push(node);
+      node = node.left ? node.left : node.right;
+    }
 
-  return result;
+    if (node === p || node === q) {
+      leftStack.push(node);
+      break;
+    }
+
+    while (leftStack.length && node === leftStack.at(-1).right)
+      node = leftStack.pop();
+    node = leftStack.at(-1).right;
+  }
+
+  // Build 'rightHistory' with reverse preorder traversal.
+  const rightStack = leftStack.slice(0, -1);
+  const target = node === p ? q : p;
+  node = rightStack.length ? rightStack.at(-1).right : node;
+  while (node !== target) {
+    while (node && node !== target) {
+      rightStack.push(node);
+      node = node.right ? node.right : node.left;
+    }
+
+    if (node === target) {
+      rightStack.push(node);
+      break;
+    }
+
+    while (rightStack.length && node === rightStack.at(-1).left)
+      node = rightStack.pop();
+    node = rightStack.at(-1).left;
+  }
+
+  // Compare 'leftHistory' and 'rightHistory' to find LCA.
+  let idx = 0;
+  const maxIdx = Math.min(leftStack.length, rightStack.length);
+  while (leftStack[idx] === rightStack[idx] && idx < maxIdx) idx += 1;
+
+  // Reporting
+  console.log('Left and right stacks:');
+  console.log(leftStack.map((n) => n.val));
+  console.log(rightStack.map((n) => n.val));
+  console.log(`Answer: ${leftStack[idx - 1]}`);
+
+  return leftStack[idx - 1];
 }

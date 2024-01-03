@@ -8,31 +8,37 @@
  */
 
 /**
- * <solution type>
+ * Iterative and Imperative Solution
  *
- * Complexity: <time complexity> and <space complexity>.
+ * Complexity: O(n^2) time and O(n) auxiliary space.
  */
 function asteroidCollision(asteroids: number[]): number[] {
-  const rAsteroids: number[] = [];
-  const lAsteroids: number[] = [];
+  let result: number[] = [];
+  let lastPassLength: number = asteroids.length;
 
-  for (const asteroid of asteroids) {
-    if (asteroid > 0) rAsteroids.push(asteroid);
-    else lAsteroids.push(asteroid);
+  while (true) {
+    for (const asteroid of asteroids) {
+      const direction = Math.sign(asteroid);
 
-    while (rAsteroids.length && lAsteroids.length) {
-      const rAsteroid = rAsteroids.at(-1);
-      const lAsteroid = lAsteroids.at(-1);
+      if ((Math.sign(result.at(-1)) || direction) > direction) {
+        if (Math.abs(result.at(-1)) < Math.abs(asteroid)) {
+          result.pop();
+          result.push(asteroid);
+        } else if (Math.abs(result.at(-1)) === Math.abs(asteroid)) {
+          result.pop();
+        }
+        continue;
+      }
 
-      if (Math.abs(rAsteroid) === Math.abs(lAsteroid)) {
-        rAsteroids.pop();
-        lAsteroids.pop();
-      } else if (Math.abs(rAsteroid) > Math.abs(lAsteroid)) lAsteroids.pop();
-      else rAsteroids.pop();
+      result.push(asteroid);
     }
-  }
-  console.log(`Right Asteroids: ${rAsteroids.toString()}`);
-  console.log(`Left Asteroids ${lAsteroids.toString()}`);
 
-  return rAsteroids.concat(lAsteroids);
+    if (result.length === lastPassLength) break;
+
+    asteroids = result;
+    result = [];
+    lastPassLength = asteroids.length;
+  }
+
+  return result;
 }

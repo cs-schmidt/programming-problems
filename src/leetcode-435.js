@@ -12,7 +12,6 @@
  *
  * Complexity: O(n*log(n)) time and O(1) auxiliary space.
  */
-
 /**
  * @param {number[][]} intervals
  * @return {number}

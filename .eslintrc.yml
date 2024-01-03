@@ -14,6 +14,8 @@ overrides:
       no-plusplus:
         - 'error'
         - allowForLoopAfterthoughts: true
+      no-bitwise:
+        - 'off'
   # TS-type files.
   - files: ['src/**/*.{ts,mts,cts}']
     env:

@@ -21,11 +21,8 @@ class TreeNode {
 /**
  * Imperative and Iterative Solution
  *
- * <description>
- *
  * Complexity: O(nodes) time and O(height) auxiliary space.
  */
-
 /**
  * @param {TreeNode} root
  * @param {TreeNode} p
@@ -33,56 +30,45 @@ class TreeNode {
  * @return {TreeNode}
  */
 function lowestCommonAncestor(root, p, q) {
-  let node = root;
-
-  // Build 'leftHistory' with preorder traversal.
-  const leftStack = [];
-  while (node) {
-    while (node && node !== p && node !== q) {
-      leftStack.push(node);
-      node = node.left ? node.left : node.right;
+  // Build left path with preorder DF traversal.
+  let lNode = root;
+  const lPath = [];
+  while (![p, q].includes(lPath.at(-1))) {
+    while (lNode && ![p, q].includes(lNode)) {
+      lPath.push(lNode);
+      lNode = lNode.left || lNode.right;
     }
-
-    if (node === p || node === q) {
-      leftStack.push(node);
+    if ([p, q].includes(lNode)) {
+      lPath.push(lNode);
       break;
     }
-
-    while (leftStack.length && node === leftStack.at(-1).right)
-      node = leftStack.pop();
-    node = leftStack.at(-1).right;
+    // Finds the last point where you could've gone right.
+    while (lPath.length && lPath.at(-1).right === lNode) lNode = lPath.pop();
+    lNode = lPath.at(-1).right;
   }
 
-  // Build 'rightHistory' with reverse preorder traversal.
-  const rightStack = leftStack.slice(0, -1);
-  const target = node === p ? q : p;
-  node = rightStack.length ? rightStack.at(-1).right : node;
-  while (node !== target) {
-    while (node && node !== target) {
-      rightStack.push(node);
-      node = node.right ? node.right : node.left;
+  // Build right path with preorder DF traversal.
+  let rNode = lNode;
+  const rPath = lPath.slice(0, -1);
+  const target = p === lNode ? q : p;
+  while (rPath.at(-1) !== target) {
+    while (rNode && rNode !== target) {
+      rPath.push(rNode);
+      rNode = rNode.left || rNode.right;
     }
-
-    if (node === target) {
-      rightStack.push(node);
+    if (rNode === target) {
+      rPath.push(rNode);
       break;
     }
-
-    while (rightStack.length && node === rightStack.at(-1).left)
-      node = rightStack.pop();
-    node = rightStack.at(-1).left;
+    // Finds the last point where you could've gone right.
+    while (rPath.length && rPath.at(-1).right === rNode) rNode = rPath.pop();
+    rNode = rPath.at(-1).right;
   }
 
-  // Compare 'leftHistory' and 'rightHistory' to find LCA.
-  let idx = 0;
-  const maxIdx = Math.min(leftStack.length, rightStack.length);
-  while (leftStack[idx] === rightStack[idx] && idx < maxIdx) idx += 1;
-
-  // Reporting
-  console.log('Left and right stacks:');
-  console.log(leftStack.map((n) => n.val));
-  console.log(rightStack.map((n) => n.val));
-  console.log(`Answer: ${leftStack[idx - 1]}`);
-
-  return leftStack[idx - 1];
+  // Compare 'leftPath' and 'rightPath' to find LCA.
+  let lcaIndex = Math.min(lPath.length, rPath.length) - 1;
+  while (lPath[lcaIndex] !== rPath[lcaIndex]) {
+    lcaIndex -= 1;
+  }
+  return lPath[lcaIndex];
 }

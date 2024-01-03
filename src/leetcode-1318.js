@@ -12,7 +12,6 @@
  *
  * Complexity: O(32) time and O(1) auxiliary space.
  */
-
 /**
  * @param {number} a
  * @param {number} b

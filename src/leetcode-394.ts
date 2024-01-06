@@ -14,7 +14,32 @@
  * Complexity: O(n) time and O(n) auxiliary space.
  */
 function decodeString(s: string): string {
-  const result = '';
+  const multipliers: number[] = [1];
+  const innerStrings: string[] = [''];
 
-  return result;
+  let charIdx = 0;
+  while (charIdx < s.length) {
+    if (/[a-z]/.test(s[charIdx]))
+      innerStrings.push(innerStrings.pop() + s[charIdx]);
+    else if (/\d/.test(s[charIdx])) {
+      let digitString = '';
+      while (/\d/.test(s[charIdx])) {
+        digitString += s[charIdx];
+        charIdx += 1;
+      }
+      multipliers.push(Number(digitString));
+      innerStrings.push('');
+    } else {
+      while (s[charIdx] === ']') {
+        const temp = innerStrings.pop().repeat(multipliers.pop());
+        innerStrings.push(innerStrings.pop() + temp);
+        charIdx += 1;
+      }
+      continue;
+    }
+
+    charIdx += 1;
+  }
+
+  return innerStrings[0];
 }

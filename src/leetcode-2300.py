@@ -25,7 +25,6 @@ class Solution:
         """
         result: list[int] = []
         potions.sort()
-        print(f'potions: {potions}\n')
         for spell in spells:
             successful_pairs = 0
             min_strength = ceil(success / spell)
@@ -33,12 +32,6 @@ class Solution:
             if min_potion != None:
                 successful_pairs = len(potions) - min_potion
             result.append(successful_pairs)
-            print('Iter: ')
-            print('=' * 30)
-            print(f'min_strength: {min_strength}')
-            print(f'min_potion: {min_potion or None}')
-            print(f'succesful_pairs: {successful_pairs}')
-            print('\n')
         return result
 
     def least_geq(self, arr: list[int], target: int) -> int:
@@ -46,7 +39,8 @@ class Solution:
         Returns the index of the smallest x in 'arr', such that 'x >= target'.
         If such a value doesn't exist, then 'None' is returned instead.
         """
-        if not (target <= arr[len(arr) - 1]): return None
+        if not (target <= arr[len(arr) - 1]):
+            return None
 
         high, low = len(arr) - 1, 0
         result = high

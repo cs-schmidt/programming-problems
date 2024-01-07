@@ -15,10 +15,16 @@ class Solution:
         self, spells: list[int], potions: list[int], success: int
     ) -> list[int]:
         """
-        <solution type>
+        Imperative and Iterative Solution
 
-        Complexity: <time complexity> and <space complexity>.
+        Complexity: O(spells * potions) and O(spells) auxiliary space.
         """
         result: list[int] = []
+
+        for spell in spells:
+            pairs = 0
+            for potion in potions:
+                if spell * potion >= success: pairs += 1
+            result.append(pairs)
 
         return result

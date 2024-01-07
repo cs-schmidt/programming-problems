@@ -8,8 +8,6 @@ Constraints:
     integer.
 """
 
-# NOTE: Improve by doing (1) and (2) in parallel.
-
 
 class Solution:
     def productExceptSelf(self, nums: list[int]) -> list[int]:
@@ -18,6 +16,8 @@ class Solution:
 
         Complexity: O(n) time and O(n) auxiliary space.
         """
+        # NOTE: Improve by doing (1) and (2) in parallel.
+
         # 1. Compute leftwards trailing product of 'nums'.
         left_tp: list[int] = [1]
         for i in range(1, len(nums)):

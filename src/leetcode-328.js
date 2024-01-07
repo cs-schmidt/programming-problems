@@ -28,7 +28,32 @@ class ListNode {
  * @return {ListNode|null}
  */
 function oddEvenList(head) {
-  // TODO: Transform 'head' in-place.
+  if (!head || !head.next) return head;
 
-  return head;
+  const oddHead = head;
+  const evenHead = head.next;
+  let oddTail = oddHead;
+  let evenTail = evenHead;
+
+  // Create 'oddList' and 'evenList'.
+  let node = evenTail.next;
+  let index = 3;
+  while (node) {
+    if (index % 2 !== 0) {
+      oddTail.next = node;
+      oddTail = oddTail.next;
+    } else {
+      evenTail.next = node;
+      evenTail = evenTail.next;
+    }
+
+    node = node.next;
+    index += 1;
+  }
+  evenTail.next = null;
+
+  // Link odd list to even list.
+  oddTail.next = evenHead;
+
+  return oddHead;
 }

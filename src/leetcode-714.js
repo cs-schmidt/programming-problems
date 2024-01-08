@@ -8,7 +8,7 @@
  */
 
 /**
- * <solution type>
+ * Imperative Dynamic Programming Solution
  *
  * Complexity: <time complexity> and <space complexity>.
  */

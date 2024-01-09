@@ -23,9 +23,9 @@ class TreeNode {
 }
 
 /**
- * <solution type>
+ * Imperative and Iterative Solution
  *
- * Complexity: <time complexity> and <space complexity>.
+ * Complexity: O(nodes) time and O(height) auxiliary space.
  */
 function longestZigZag(root: TreeNode): number {
   let maxZigzag = 0;
@@ -40,13 +40,13 @@ function longestZigZag(root: TreeNode): number {
     while (node) {
       path.push(node);
       if (direction === 'left') {
-        node = node.left;
-        direction = 'right';
         if (node.right) branches.push(node.right);
+        direction = 'right';
+        node = node.left;
       } else {
-        node = node.right;
-        direction = 'left';
         if (node.left) branches.push(node.left);
+        direction = 'left';
+        node = node.right;
       }
       currZigzag += 1;
     }
@@ -54,9 +54,11 @@ function longestZigZag(root: TreeNode): number {
     // Update 'maxZigzag' in case we found a bigger one.
     if (currZigzag > maxZigzag) maxZigzag = currZigzag;
 
-    //
+    // Start on the next branch.
     node = branches.pop();
     currZigzag = 1;
+    if (direction === 'left') direction = 'right';
+    else direction = 'left';
   }
 
   return maxZigzag;

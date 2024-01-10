@@ -25,10 +25,39 @@ class TreeNode {
 /**
  * <solution type>
  *
- * Complexity: <time complexity> and <space complexity>
+ * Complexity: <time complexity> and <space complexity>.
  */
 function longestZigZag(root: TreeNode): number {
-  const result = 0;
+  let maxZigzag = 0;
+  let currZigzag = 0;
+  let node: TreeNode | null = root;
+  const path: TreeNode[] = [];
+  const branches: TreeNode[] = [];
+  let direction: 'left' | 'right' = 'left';
 
-  return 0;
+  while (node || branches.length) {
+    // Move as far down a zigzag as possible.
+    while (node) {
+      path.push(node);
+      if (direction === 'left') {
+        node = node.left;
+        direction = 'right';
+        if (node.right) branches.push(node.right);
+      } else {
+        node = node.right;
+        direction = 'left';
+        if (node.left) branches.push(node.left);
+      }
+      currZigzag += 1;
+    }
+
+    // Update 'maxZigzag' in case we found a bigger one.
+    if (currZigzag > maxZigzag) maxZigzag = currZigzag;
+
+    //
+    node = branches.pop();
+    currZigzag = 1;
+  }
+
+  return maxZigzag;
 }

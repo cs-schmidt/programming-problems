@@ -16,6 +16,8 @@ overrides:
         - allowForLoopAfterthoughts: true
       no-bitwise:
         - 'off'
+      prefer-const:
+        - 'warn'
   # TS-type files.
   - files: ['src/**/*.{ts,mts,cts}']
     env:
@@ -69,3 +71,5 @@ overrides:
         - 'off'
       prefer-arrow-callback:
         - 'off'
+      prefer-const:
+        - 'warn'

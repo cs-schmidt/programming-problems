@@ -25,54 +25,37 @@ class TreeNode {
 /**
  * Imperative and Iterative Solution
  *
- * Complexity: O(nodes) time and O(height) auxiliary space.
+ * Complexity: O(nodes) time and O(nodes) auxiliary space.
  */
 function longestZigZag(root: TreeNode): number {
   let result = 0;
-  let direction: -1 | 1 = -1;
-  let node: TreeNode | null = root;
-  const zigzag: TreeNode[] = [];
-  const points: TreeNode[] = [];
+  const orders: [TreeNode, -1 | 1][] = [
+    [root, -1],
+    [root, 1]
+  ];
 
-  while (node || points.length) {
-    console.log('Zigzag Start');
-    console.log('='.repeat(30));
-    console.log(`direction: ${direction}`);
+  while (orders.length) {
+    let [node, direction] = orders.shift();
+    const zigzag: TreeNode[] = [];
 
-    // Builds 'zigzag' starting from a given 'node'.
+    zigzag.push(node);
+    if (direction === -1) node = node.left;
+    else node = node.right;
+    direction *= -1;
+
     while (node) {
       zigzag.push(node);
       if (direction === -1) {
-        if (node.right) points.push(node.right);
+        if (node.right) orders.push([node, 1]);
         node = node.left;
       } else {
-        if (node.left) points.push(node.left);
+        if (node.left) orders.push([node, -1]);
         node = node.right;
       }
       direction *= -1;
     }
 
-    console.log(`zigzag: ${zigzag.map((n) => n.val).toString()}`);
-    console.log(`points: ${points.map((n) => n.val).toString()}`);
-
-    // Check if the 'zigzag' we just built is the biggest so far.
-    if (zigzag.at(0) !== root && zigzag.length + 1 > result)
-      result = zigzag.length + 1;
-    else if (zigzag.length > result)
-      if (
-        ((zigzag.length + 1) % 2 === 0 && direction === 1) ||
-        ((zigzag.length + 1) % 2 !== 0 && direction === -1)
-      ) {
-        // Checks if the starting direction of 'zigzag' was left or right.
-        // Reset at the right to left zigzag.
-        node = zigzag.at(0) ?? null;
-        direction = 1;
-      } else {
-        // Check from the next starting point.
-        node = points.pop();
-        direction = -1;
-      }
-    zigzag.length = 0;
+    if (zigzag.length - 1 > result) result = zigzag.length - 1;
   }
 
   return result;

@@ -28,38 +28,52 @@ class TreeNode {
  * Complexity: O(nodes) time and O(height) auxiliary space.
  */
 function longestZigZag(root: TreeNode): number {
-  let maxZigzag = 0;
-  let currZigzag = 0;
+  let result = 0;
+  let direction: -1 | 1 = -1;
   let node: TreeNode | null = root;
-  const path: TreeNode[] = [];
-  const branches: TreeNode[] = [];
-  let direction: 'left' | 'right' = 'left';
+  const zigzag: TreeNode[] = [];
+  const points: TreeNode[] = [];
 
-  while (node || branches.length) {
-    // Move as far down a zigzag as possible.
+  while (node || points.length) {
+    console.log('Zigzag Start');
+    console.log('='.repeat(30));
+    console.log(`direction: ${direction}`);
+
+    // Builds 'zigzag' starting from a given 'node'.
     while (node) {
-      path.push(node);
-      if (direction === 'left') {
-        if (node.right) branches.push(node.right);
-        direction = 'right';
+      zigzag.push(node);
+      if (direction === -1) {
+        if (node.right) points.push(node.right);
         node = node.left;
       } else {
-        if (node.left) branches.push(node.left);
-        direction = 'left';
+        if (node.left) points.push(node.left);
         node = node.right;
       }
-      currZigzag += 1;
+      direction *= -1;
     }
 
-    // Update 'maxZigzag' in case we found a bigger one.
-    if (currZigzag > maxZigzag) maxZigzag = currZigzag;
+    console.log(`zigzag: ${zigzag.map((n) => n.val).toString()}`);
+    console.log(`points: ${points.map((n) => n.val).toString()}`);
 
-    // Start on the next branch.
-    node = branches.pop();
-    currZigzag = 1;
-    if (direction === 'left') direction = 'right';
-    else direction = 'left';
+    // Check if the 'zigzag' we just built is the biggest so far.
+    if (zigzag.at(0) !== root && zigzag.length + 1 > result)
+      result = zigzag.length + 1;
+    else if (zigzag.length > result)
+      if (
+        ((zigzag.length + 1) % 2 === 0 && direction === 1) ||
+        ((zigzag.length + 1) % 2 !== 0 && direction === -1)
+      ) {
+        // Checks if the starting direction of 'zigzag' was left or right.
+        // Reset at the right to left zigzag.
+        node = zigzag.at(0) ?? null;
+        direction = 1;
+      } else {
+        // Check from the next starting point.
+        node = points.pop();
+        direction = -1;
+      }
+    zigzag.length = 0;
   }
 
-  return maxZigzag;
+  return result;
 }

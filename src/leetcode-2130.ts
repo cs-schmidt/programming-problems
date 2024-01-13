@@ -17,12 +17,18 @@ class ListNode {
 }
 
 /**
- * <solution type>
+ * Imperative and Iterative Solution
  *
- * Complexity: <time complexity> and <space complexity>.
+ * Complexity: O(n) time and O(n) auxiliary space.
  */
 function pairSum(head: ListNode): number {
-  const result = 0;
-
+  let result = 0;
+  const values = [];
+  while (head) {
+    values.push(head.val);
+    head = head.next;
+  }
+  while (values.length > 1)
+    result = Math.max(values.shift() + values.pop(), result);
   return result;
 }

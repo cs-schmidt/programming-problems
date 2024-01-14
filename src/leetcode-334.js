@@ -7,9 +7,9 @@
  */
 
 /**
- * <solution type>
+ * Imperative and Iterative Solution
  *
- * Complexity: <time complexity> and <space complexity>.
+ * Complexity: O(n) time and O(1) auxiliary space.
  */
 /**
  * @param {number[]} nums
@@ -17,6 +17,7 @@
  */
 function increasingTriplet(nums) {
   var result = false;
-
+  // NOTE: I think a solution  in O(n) time and O(1) space is achievable in a
+  //       manner similar to the longest increasing subsequence problem
   return result;
 }

@@ -18,6 +18,8 @@ overrides:
         - 'off'
       prefer-const:
         - 'warn'
+      no-var:
+        - 'off'
   # TS-type files.
   - files: ['src/**/*.{ts,mts,cts}']
     env:

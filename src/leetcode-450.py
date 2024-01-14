@@ -25,13 +25,51 @@ class TreeNode:
 
 
 class Solution:
-    """
-    <solution type>
+    # TODO: Refactor solution to cleaner code.
+    def deleteNode(self, root: Optional["TreeNode"], key: int) -> TreeNode:
+        """
+        Imperative and Iterative Solution
 
-    Complexity: <time complexity> and <space complexity>.
-    """
-
-    def deleteNode(self, root: TreeNode, key: int) -> TreeNode:
-        result = root
-
-        return result
+        Complexity: O(height) time and O(1) auxiliary space.
+        """
+        if not root: return None
+        node: Optional["TreeNode"] = root
+        parent_node: TreeNode = root
+        while node and node.val != key:
+            parent_node = node
+            if node.val < key: node = node.right
+            else: node = node.left
+        if not node: return root
+        if parent_node == node:
+            if node.left and node.right:
+                parent_node = node.right
+                child_node: TreeNode = node.left
+                node = parent_node
+                while node.left: node = node.left
+                node.left = child_node
+                return parent_node
+            elif node.left: return node.left
+            elif node.right: return node.right
+            else: return None
+        else:
+            if parent_node.left == node:
+                if node.left and node.right:
+                    child_node: TreeNode = node.left
+                    node = node.right
+                    parent_node.left = node
+                    while node.left: node = node.left
+                    node.left = child_node
+                elif node.left: parent_node.left = node.left
+                elif node.right: parent_node.left = node.right
+                else: parent_node.left = None
+            else:
+                if node.left and node.right:
+                    child_node: TreeNode = node.left
+                    node = node.right
+                    parent_node.right = node
+                    while node.left: node = node.left
+                    node.left = child_node
+                elif node.left: parent_node.right = node.left
+                elif node.right: parent_node.right = node.right
+                else: parent_node.right = None
+        return root

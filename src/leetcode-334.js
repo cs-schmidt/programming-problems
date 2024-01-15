@@ -9,6 +9,9 @@
 /**
  * Imperative and Iterative Solution
  *
+ * Applies a "limited dynamic programming" approach in a manner similar to the
+ * Longest Increasing Subsequence Problem, going bottom-up.
+ *
  * Complexity: O(n) time and O(1) auxiliary space.
  */
 /**
@@ -16,8 +19,18 @@
  * @return {boolean}
  */
 function increasingTriplet(nums) {
-  var result = false;
-  // NOTE: I think a solution  in O(n) time and O(1) space is achievable in a
-  //       manner similar to the longest increasing subsequence problem
-  return result;
+  var size = 1;
+  var index = 0;
+  var minHead = nums.at(0);
+  while (index < nums.length && size < 3) {
+    while (index < nums.length && nums.at(index) <= minHead) {
+      minHead = nums.at(index);
+      index += 1;
+    }
+    if (index < nums.length) {
+      size += 1;
+      minHead = nums.at(index);
+    }
+  }
+  return size === 3;
 }

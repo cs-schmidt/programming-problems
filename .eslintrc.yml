@@ -12,7 +12,7 @@ overrides:
       no-unused-vars:
         - 'warn'
       no-plusplus:
-        - 'error'
+        - 'warn'
         - allowForLoopAfterthoughts: true
       no-bitwise:
         - 'off'
@@ -20,6 +20,8 @@ overrides:
         - 'warn'
       no-var:
         - 'off'
+      no-param-reassign:
+        - 'warn'
   # TS-type files.
   - files: ['src/**/*.{ts,mts,cts}']
     env:

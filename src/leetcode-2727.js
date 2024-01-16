@@ -16,5 +16,7 @@
  * @return {boolean}
  */
 function isEmpty(obj) {
-  return JSON.stringify(obj).length === 2;
+  return obj instanceof Array
+    ? obj.length === 0
+    : Object.keys(obj).length === 0;
 }

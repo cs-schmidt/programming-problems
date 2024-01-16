@@ -17,10 +17,10 @@
  * @return {{increment: Function, decrement: Function, reset: Function}}
  */
 function createCounter(init) {
-  let value = init;
+  let currentCount = init;
   return {
-    increment: () => ++value,
-    decrement: () => --value,
-    reset: () => (value = init)
+    increment: () => ++currentCount,
+    decrement: () => --currentCount,
+    reset: () => (currentCount = init)
   };
 }

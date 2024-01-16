@@ -3,7 +3,7 @@
  *
  * Constraints:
  *  1. obj is a valid JSON object or array
- *  2. 2 <= JSON.stringify(obj).length <= 105
+ *  2. 2 <= JSON.stringify(obj).length <= 10^5
  */
 
 /**

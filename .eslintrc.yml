@@ -27,6 +27,8 @@ overrides:
         - 'except-parens'
       no-throw-literal:
         - 'warn'
+      lines-between-class-members:
+        - 'off'
   # TS-type files.
   - files: ['src/**/*.{ts,mts,cts}']
     env:

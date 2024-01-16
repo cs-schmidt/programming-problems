@@ -22,6 +22,9 @@ overrides:
         - 'off'
       no-param-reassign:
         - 'warn'
+      no-return-assign:
+        - 'error'
+        - 'except-parens'
   # TS-type files.
   - files: ['src/**/*.{ts,mts,cts}']
     env:

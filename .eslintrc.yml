@@ -25,6 +25,8 @@ overrides:
       no-return-assign:
         - 'error'
         - 'except-parens'
+      no-throw-literal:
+        - 'warn'
   # TS-type files.
   - files: ['src/**/*.{ts,mts,cts}']
     env:

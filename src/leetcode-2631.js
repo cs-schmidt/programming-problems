@@ -16,11 +16,10 @@
  * @return {Object}
  */
 Array.prototype.groupBy = function (fn) {
-  const result = {};
-  this.forEach((val) => {
+  return this.reduce((result, val) => {
     const key = fn(val);
     if (Object.hasOwn(result, key)) result[key].push(val);
     else result[key] = [val];
-  });
-  return result;
+    return result;
+  }, {});
 };

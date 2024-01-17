@@ -6,6 +6,8 @@
  *  2. -2^31 <= nums[i] <= 2^31 - 1
  */
 
+// TODO: Complete this problem.
+
 /**
  * Imperative and Iterative Solution
  *
@@ -19,18 +21,30 @@
  * @return {boolean}
  */
 function increasingTriplet(nums) {
-  var size = 1;
-  var index = 0;
-  var minHead = nums.at(0);
-  while (index < nums.length && size < 3) {
-    while (index < nums.length && nums.at(index) <= minHead) {
-      minHead = nums.at(index);
-      index += 1;
-    }
-    if (index < nums.length) {
-      size += 1;
-      minHead = nums.at(index);
-    }
+  if (nums.length < 3) return false;
+  const sequence = [nums.at(0)];
+  let index = 0;
+  while (index < nums.length && nums.at(index) <= sequence.at(-1)) {
+    sequence[sequence.length - 1] = nums.at(index);
+    index += 1;
   }
-  return size === 3;
+  if (index < nums.length) {
+    sequence[sequence.length - 1] = nums.at(index);
+    index += 1;
+  }
+  while (index < nums.length && nums.length < 3) {
+    if (nums.at(index) < nums.at(0)) {
+      //
+    } else if (
+      sequence.at(0) < nums.at(index) &&
+      nums.at(index) < sequence.at(-1)
+    ) {
+      sequence.length -= 1;
+      sequence.push(nums.at(index));
+    } else if (nums.at(index) > sequence.at(-1)) {
+      sequence.push(nums.at(index));
+    }
+    index += 1;
+  }
+  return sequence.length >= 3;
 }

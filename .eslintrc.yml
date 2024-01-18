@@ -31,6 +31,10 @@ overrides:
         - 'off'
       no-extend-native:
         - 'warn'
+      no-use-before-define:
+        - 'off'
+      no-loop-func:
+        - 'warn'
   # TS-type files.
   - files: ['src/**/*.{ts,mts,cts}']
     env:

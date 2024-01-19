@@ -9,11 +9,8 @@
 /** Definition of a binary tree node. */
 class TreeNode {
   val: number;
-
   left: TreeNode | null;
-
   right: TreeNode | null;
-
   constructor(
     val = 0,
     left: TreeNode | null = null,
@@ -26,11 +23,9 @@ class TreeNode {
 }
 
 /**
- * Iterative and Imperative Solution
+ * Imperative and Iterative Solution
  *
- * <description>
- *
- * Complexity: <time complexity> and <space complexity>.
+ * Complexity: <time> and <space> auxiliary space.
  */
 function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
   const tree1History: TreeNode[] = [];
@@ -39,7 +34,6 @@ function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
   let tree2Node: TreeNode | null = root2;
   let tree1LeafVal: number | null = null;
   let tree2LeafVal: number | null = null;
-
   do {
     // Preform in-order DF traversal on tree 1 until a leaf value is found.
     while ((tree1Node !== null || tree1History.length > 0) && !tree1LeafVal) {
@@ -54,7 +48,6 @@ function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
         tree1LeafVal = tree1History.at(-1).val;
       tree1Node = tree1History.pop().right;
     }
-
     // Preform in-order DF traversal on tree 2 until a leaf value is found.
     while ((tree2Node !== null || tree2History.length > 0) && !tree2LeafVal) {
       // Traverse down the leftwards path of nodes.
@@ -68,15 +61,12 @@ function leafSimilar(root1: TreeNode | null, root2: TreeNode | null): boolean {
         tree2LeafVal = tree2History.at(-1).val;
       tree2Node = tree2History.pop().right;
     }
-
     // Compare leaf node values from both trees.
     if (tree1LeafVal !== tree2LeafVal) return false;
-
     // Reset leaf node values.
     tree1LeafVal = null;
     tree2LeafVal = null;
   } while (tree1History.length > 0 || tree2History.length > 0);
-
   // Returns true if a failure condition wasn't achieved.
   return true;
 }

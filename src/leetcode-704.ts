@@ -8,17 +8,23 @@
  *  4. nums is sorted in ascending order.
  */
 
-function search(nums: number[], target: number): number {
-  let start = 0;
-  let end: number = nums.length - 1;
+// TODO: Improve solution's time and space complexity.
 
+/**
+ * Imperative and Iterative Solution
+ *
+ * Complexity: O(log(n)) time and O(1) auxiliary space.
+ */
+function search(sortedNums: number[], target: number): number {
+  let start = 0;
+  let end: number = sortedNums.length - 1;
   while (start <= end) {
-    if (start === end && nums[start] !== target) return -1;
-    if (nums[Math.floor((start + end) / 2)] < target)
+    if (start === end && sortedNums[start] !== target) return -1;
+    if (sortedNums[Math.floor((start + end) / 2)] < target)
       start = Math.ceil((start + end) / 2);
-    else if (nums[Math.floor((start + end) / 2)] > target)
+    else if (sortedNums[Math.floor((start + end) / 2)] > target)
       end = Math.floor((start + end) / 2);
-    else if (nums[Math.floor((start + end) / 2)] === target)
+    else if (sortedNums[Math.floor((start + end) / 2)] === target)
       return Math.floor((start + end) / 2);
   }
 }

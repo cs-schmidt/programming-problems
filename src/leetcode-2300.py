@@ -9,6 +9,8 @@ Constraints:
  5. 1 <= success <= 10^10
 """
 
+# TODO: Improve solution's time and space complexity.
+
 from math import floor, ceil
 
 
@@ -34,6 +36,8 @@ class Solution:
             result.append(successful_pairs)
         return result
 
+    # Utilities
+    # ================================================================= 
     def least_geq(self, arr: list[int], target: int) -> int:
         """
         Returns the index of the smallest x in 'arr', such that 'x >= target'.
@@ -41,7 +45,6 @@ class Solution:
         """
         if not (target <= arr[len(arr) - 1]):
             return None
-
         high, low = len(arr) - 1, 0
         result = high
         while low <= high:
@@ -55,5 +58,4 @@ class Solution:
                 if arr[mid] <= arr[result]:
                     result = mid
                 high = mid - 1
-
         return result

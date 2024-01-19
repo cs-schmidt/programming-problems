@@ -5,7 +5,7 @@
  *  1. -2^31 <= x <= 2^31 - 1
  */
 
-// TODO: Complete the problem's follow up portion.
+// TODO: Complete this problem's "follow up" portion.
 
 /**
  * Imperative and Iterative Solution

@@ -7,8 +7,10 @@
  *  3. 1 <= c <= 10^9
  */
 
+// TODO: Improve solution's time and space complexity.
+
 /**
- * Iterative and Imperative Solution
+ * Imperative and Iterative Solution
  *
  * Complexity: O(32) time and O(1) auxiliary space.
  */
@@ -24,10 +26,8 @@ function minFlips(a, b, c) {
     const bit1 = (a >> i) & 1;
     const bit2 = (b >> i) & 1;
     const bit3 = (c >> i) & 1;
-
     if ((bit1 || bit2) && !bit3) result += bit1 && bit2 ? 2 : 1;
     else if (!(bit1 || bit2) && bit3) result += 1;
   }
-
   return result;
 }

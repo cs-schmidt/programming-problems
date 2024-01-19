@@ -9,6 +9,9 @@
  *  5. p and q will exist in the tree.
  */
 
+// TODO: Improve solution's time and space complexity.
+// TODO: Improve code cleanliness.
+
 /** Represents a binary tree node. */
 class TreeNode {
   constructor(val = 0, left = null, right = null) {
@@ -46,7 +49,6 @@ function lowestCommonAncestor(root, p, q) {
     while (lPath.length && lPath.at(-1).right === lNode) lNode = lPath.pop();
     lNode = lPath.at(-1).right;
   }
-
   // Build right path with preorder DF traversal.
   let rNode = lNode;
   const rPath = lPath.slice(0, -1);
@@ -64,7 +66,6 @@ function lowestCommonAncestor(root, p, q) {
     while (rPath.length && rPath.at(-1).right === rNode) rNode = rPath.pop();
     rNode = rPath.at(-1).right;
   }
-
   // Compare 'leftPath' and 'rightPath' to find LCA.
   let lcaIndex = Math.min(lPath.length, rPath.length) - 1;
   while (lPath[lcaIndex] !== rPath[lcaIndex]) {

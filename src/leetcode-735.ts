@@ -7,15 +7,16 @@
  *  3. asteroids[i] != 0
  */
 
+// TODO: Improve solution's time and space complexity.
+
 /**
- * Iterative and Imperative Solution
+ * Imperative and Iterative Solution
  *
  * Complexity: O(n^2) time and O(n) auxiliary space.
  */
 function asteroidCollision(asteroids: number[]): number[] {
   let result: number[] = [];
   let lastPassLength: number = asteroids.length;
-
   while (true) {
     for (const asteroid of asteroids) {
       const direction = Math.sign(asteroid);
@@ -32,13 +33,10 @@ function asteroidCollision(asteroids: number[]): number[] {
 
       result.push(asteroid);
     }
-
     if (result.length === lastPassLength) break;
-
     asteroids = result;
     result = [];
     lastPassLength = asteroids.length;
   }
-
   return result;
 }

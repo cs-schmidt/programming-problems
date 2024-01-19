@@ -10,12 +10,10 @@ function findDifference(nums1: number[], nums2: number[]): number[][] {
   const distinctNums1 = new Set(nums1);
   const distinctNums2 = new Set(nums2);
   const result: number[][] = [[], []];
-
   for (const num of distinctNums1) {
     if (!distinctNums2.has(num)) result[0].push(num);
     else distinctNums2.delete(num);
   }
   result[1] = Array.from(distinctNums2);
-
   return result;
 }

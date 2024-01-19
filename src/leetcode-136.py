@@ -15,7 +15,7 @@ from operator import xor
 class Solution:
     def singleNumber(self, nums: list[int]) -> int:
         """
-        Iterative and Imperative Solution
+        Declarative and Linearly Iterative Solution
 
         The solution exploits the commutative property of the bitwise XOR
         operator. Since XOR is commutative, the output of "XORing" all the

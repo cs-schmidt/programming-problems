@@ -6,14 +6,13 @@
  *  2. -1000 <= Node.val <= 1000.
  */
 
+// TODO: Improve solution's space complexity.
+
 /** Definition for a binary tree node. */
 class TreeNode {
   val: number;
-
   left: TreeNode | null;
-
   right: TreeNode | null;
-
   constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
     this.val = val === undefined ? 0 : val;
     this.left = left === undefined ? null : left;
@@ -21,12 +20,17 @@ class TreeNode {
   }
 }
 
+/**
+ * Declarative and Linearly Recursive Solution
+ *
+ * Complexity: <time> and <space> auxiliary complexity.
+ */
 function levelOrder(root: TreeNode | null): number[][] {
   const result: number[][] = [];
   appendData(root, 0);
   return result;
-
-  // *******************************************************
+  // Internal Procedures
+  // ================================================================
   function appendData(node: TreeNode | null, level: number) {
     if (!node) return;
     if (!(result[level] instanceof Array)) result[level] = [];

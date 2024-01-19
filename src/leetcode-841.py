@@ -16,14 +16,13 @@ from collections import deque
 class Solution:
     def canVisitAllRooms(self, rooms: list[list[int]]) -> bool:
         """
-        Iterative and Imperative Solution
+        Imperative and Iterative Solution
 
         Complexity: O(n) time and O(width) + O(1) auxiliary space.
         """
         level: int = 0
         roomQueue: deque[list[int]] = deque([rooms[0]])
         visitedRooms: set[int] = set([0])
-
         while roomQueue and len(visitedRooms) < len(rooms):
             for i in range(len(roomQueue)):
                 currentRoom: list[int] = roomQueue.popleft()
@@ -32,5 +31,4 @@ class Solution:
                         roomQueue.append(rooms[roomKey])
                         visitedRooms.add(roomKey)
             if len(roomQueue) > 0: level += 1
-
         return len(visitedRooms) == len(rooms)

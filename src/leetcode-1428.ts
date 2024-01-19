@@ -27,7 +27,6 @@ function leftMostColumnWithOne(binaryMatrix: BinaryMatrix): number {
   let currRow = 0;
   let maxCol: number = cols - 1;
   let found = false;
-
   // Iterate through the rows of `binaryMatrix`.
   while (currRow < rows && maxCol !== 0) {
     // Preform the modified binary search within the current row (`currRow`).
@@ -41,7 +40,6 @@ function leftMostColumnWithOne(binaryMatrix: BinaryMatrix): number {
       if (binaryMatrix.get(currRow, midIdx) === 1) highIdx = midIdx;
       else lowIdx = midIdx + 1;
     }
-
     // After the loop above we check if we found a new left-most column.
     if (lowIdx <= maxCol && binaryMatrix.get(currRow, lowIdx) === 1) {
       maxCol = lowIdx;
@@ -49,6 +47,5 @@ function leftMostColumnWithOne(binaryMatrix: BinaryMatrix): number {
     }
     currRow += 1;
   }
-
   return found ? maxCol : -1;
 }

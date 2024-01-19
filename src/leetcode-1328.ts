@@ -23,7 +23,6 @@ function breakPalindrome(palindrome: string): string {
         return `${palindrome.slice(0, i)}a${palindrome.slice(i + 1)}`;
     }
   }
-
   // If we didn't return a result by now, then we didn't find any character that
   // wasn't the letter a. Therefore, we have to replace the last character with
   // the letter b, this produces the lowest lexographical result. We only do

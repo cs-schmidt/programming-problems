@@ -10,15 +10,13 @@ Constraints:
 class Solution:
     def minCostClimbingStairs(self, stepCosts: list[int]) -> int:
         """
-        Dynamic Programming: Iterative and Imperative
+        Imperative and Dynamic Programming Solution
 
         Complexity: O(n) time and O(1) auxiliary space.
         """
         costParts: list[int] = [stepCosts[-2], stepCosts[-1]]
-
         for i in range(len(stepCosts) - 3, -1, -1):
             stepMin = stepCosts[i] + min(costParts)
             costParts[1] = costParts[0]
             costParts[0] = stepMin
-
         return min(costParts)

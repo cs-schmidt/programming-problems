@@ -7,18 +7,24 @@
  *  3. The height of the n-ary tree is less than or equal to 1000
  */
 
-/** Definition for node. */
+// TODO: Improve solution's time and space complexity.
+// TODO: Complete this problem's "follow up" portion.
+
+/** Represents a node in an n-ary tree. */
 class Node {
   val: number;
-
   children: Node[];
-
   constructor(val?: number) {
     this.val = val === undefined ? 0 : val;
     this.children = [];
   }
 }
 
+/**
+ * Declarative and Recursive Solution
+ *
+ * Complexity: <time> and <space> auxiliary complexity.
+ */
 function preorder(root: Node | null): number[] {
   if (!root) return [];
   return [root.val].concat(

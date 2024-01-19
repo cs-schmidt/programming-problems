@@ -6,6 +6,8 @@
  *  2. 1 <= Node.val <= 105
  */
 
+// TODO: Improve solution's time and space complexity.
+
 /** Represents a node in a singly-linked list. */
 class ListNode {
   val: number;

@@ -6,11 +6,10 @@ Constraints:
  2. Each node's value is between [-10^4, 10^4].
 """
 
+# TODO: Improve solution's time and space complexity.
 
 class TreeNode:
-    """
-    Represents a binary tree node.
-    """
+    """Represents a binary tree node."""
 
     def __init__(self, val=0, left=None, right=None) -> None:
         self.val = val
@@ -21,7 +20,7 @@ class TreeNode:
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
         """
-        Iterative and Imperative Solution
+        Imperative and Iterative Solution
 
         Complexity: O(nodes) time and O(height) auxiliary space.
         """
@@ -29,7 +28,6 @@ class Solution:
         pathHistory: list[tuple[TreeNode, int]] = []
         node: TreeNode = root
         pathMax = node.val
-
         while node != None or len(pathHistory) > 0:
             while node != None:
                 if node.val >= pathMax:
@@ -39,5 +37,4 @@ class Solution:
                 node = node.left
             pathMax = pathHistory[-1][1]
             node = pathHistory.pop()[0].right
-
         return result

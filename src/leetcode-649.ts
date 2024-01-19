@@ -26,9 +26,8 @@ function predictPartyVictory(senate: string): string {
   let p1RoundVotes = 0;
   let p2RoundVotes = 0;
   let votingMembers: Set<number> = new Set();
-
   for (let i = 0; i < senate.length; i++) {
-    if (senate[i] == 'R') {
+    if (senate[i] === 'R') {
       if (p2RoundVotes > 0) p2RoundVotes -= 1;
       else {
         votingMembers.add(i);
@@ -42,14 +41,13 @@ function predictPartyVictory(senate: string): string {
       activeP2Members += 1;
     }
   }
-
   while (
     !(activeP1Members - p2RoundVotes >= 2 * activeP2Members) &&
     !(activeP2Members - p1RoundVotes >= 2 * activeP1Members)
   ) {
     const retainedVoters: Set<number> = new Set();
     for (const member of votingMembers) {
-      if (senate[member] == 'R') {
+      if (senate[member] === 'R') {
         if (p2RoundVotes > 0) p2RoundVotes -= 1;
         else {
           retainedVoters.add(member);
@@ -65,7 +63,6 @@ function predictPartyVictory(senate: string): string {
     }
     votingMembers = retainedVoters;
   }
-
   return activeP1Members - p2RoundVotes >= 2 * activeP2Members
     ? 'Radiant'
     : 'Dire';

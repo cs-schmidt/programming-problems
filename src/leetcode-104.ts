@@ -9,11 +9,8 @@
 /** Definition of a binary tree node. */
 class TreeNode {
   val: number;
-
   left: TreeNode | null;
-
   right: TreeNode | null;
-
   constructor(
     val = 0,
     left: TreeNode | null = null,
@@ -26,7 +23,7 @@ class TreeNode {
 }
 
 /**
- * Recursive Approach.
+ * Declarative and Linearly Recursive Solution
  *
  * This solution is adapted from a recursive depth-first search (DFS) algorithm.
  * We define an internal procedure `recursivePostTraversal()` and a variable
@@ -39,13 +36,10 @@ class TreeNode {
  */
 function maxDepth(root: TreeNode | null): number {
   if (!root) return 0;
-
   let result = 0;
   let traversalDepth = 0;
   recursivePostTraversal(root);
-
   return result;
-
   // Internal Procedures
   // =================================================================
   function recursivePostTraversal(node: TreeNode | null) {

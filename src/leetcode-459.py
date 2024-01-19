@@ -6,6 +6,8 @@ Constraints:
  2. s consists of lowercase English letters.
 """
 
+# TODO: Complete solution.
+
 class Solution:
     def repeatedSubstringPattern(self, str: str) -> bool:
         """

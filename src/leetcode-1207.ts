@@ -7,19 +7,16 @@
  */
 
 /**
- * Iterative and Imperative Solution
+ * Imperative and Iterative Solution
  *
  * Complexity: O(n) time and O(n) auxiliary space.
  */
 function uniqueOccurrences(arr: number[]): boolean {
   const elementFrequencies: Map<number, number> = new Map();
   const distictFrequencies: Set<number> = new Set();
-
   for (const element of arr)
     elementFrequencies.set(element, elementFrequencies.get(element) + 1 || 1);
-
   for (const frequency of elementFrequencies.values())
     distictFrequencies.add(frequency);
-
   return elementFrequencies.size === distictFrequencies.size;
 }

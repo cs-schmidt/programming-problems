@@ -7,6 +7,9 @@
  *  3. num1 and num2 don't have any leading zeros except for the zero itself.
  */
 
+// TODO: Improve solution's space complexity.
+// TODO: Improve code cleanliness.
+
 /**
  * Imperative and Iterative Solution
  *

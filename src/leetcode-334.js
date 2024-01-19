@@ -6,7 +6,8 @@
  *  2. -2^31 <= nums[i] <= 2^31 - 1
  */
 
-// TODO: Improve performance and readability.
+// TODO: Improve solution's time and space complexity.
+// TODO: Improve code cleanliness.
 
 /**
  * Declarative and Iterative Solution
@@ -37,7 +38,8 @@ function increasingTriplet(nums) {
     low = nums[low] <= nums[nextLow] ? low : nextLow;
     high = nextHigh;
   }
-
+  // Internal Procedures
+  // =================================================================
   /**
    * From 'start' find the first index on `nums` where the element at that index
    * is less than the element after it. Otherwise, we return -1 when there is no

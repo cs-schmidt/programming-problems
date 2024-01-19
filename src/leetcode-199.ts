@@ -6,14 +6,11 @@
  *  2. -100 <= Node.val <= 100
  */
 
-/** Definition of a binary tree node. */
+/** Represents a binary tree node. */
 class TreeNode {
   val: number;
-
   left: TreeNode | number;
-
   right: TreeNode | number;
-
   constructor(
     val = 0,
     left: TreeNode | null = null,
@@ -26,7 +23,7 @@ class TreeNode {
 }
 
 /**
- * Iterative and Imperative Solution
+ * Imperative and Iterative Solution
  *
  * Utilizes breadth-first traversal to store the rightmost value at every level
  * in the binary tree. The resulting array of these values is returned.
@@ -35,14 +32,11 @@ class TreeNode {
  */
 function rightSideView(root: TreeNode | null): number[] {
   if (!root) return [];
-
   const rightSideValues: number[] = [];
   const nodesAtLevel: TreeNode[] = [root];
   let nodeCountAtLevel = 1;
-
   while (nodeCountAtLevel) {
     const node: TreeNode = nodesAtLevel.shift();
-
     nodeCountAtLevel -= 1;
     if (node.left) nodesAtLevel.push(node.left);
     if (node.right) nodesAtLevel.push(node.right);
@@ -51,6 +45,5 @@ function rightSideView(root: TreeNode | null): number[] {
       nodeCountAtLevel = nodesAtLevel.length;
     }
   }
-
   return rightSideValues;
 }

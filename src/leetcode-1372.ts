@@ -6,6 +6,8 @@
  *  2. 1 <= Node.val <= 100
  */
 
+// TODO: Improve solution's time and space complexity.
+
 /** Represents a binary tree node. */
 class TreeNode {
   val: number;
@@ -33,16 +35,13 @@ function longestZigZag(root: TreeNode): number {
     [root, -1],
     [root, 1]
   ];
-
   while (orders.length) {
     let [node, direction] = orders.shift();
     const zigzag: TreeNode[] = [];
-
     zigzag.push(node);
     if (direction === -1) node = node.left;
     else node = node.right;
     direction *= -1;
-
     while (node) {
       zigzag.push(node);
       if (direction === -1) {
@@ -54,9 +53,7 @@ function longestZigZag(root: TreeNode): number {
       }
       direction *= -1;
     }
-
     if (zigzag.length - 1 > result) result = zigzag.length - 1;
   }
-
   return result;
 }

@@ -11,9 +11,7 @@ from collections import deque
 
 
 class TreeNode:
-    """
-    Represents a binary tree node.
-    """
+    """ Represents a binary tree node. """
 
     def __init__(
         self,
@@ -29,7 +27,7 @@ class TreeNode:
 class Solution:
     def maxLevelSum(self, root: TreeNode) -> int:
         """
-        Iterable and Imperative Solution
+        Imperative and Iterative Solution
 
         Complexity: O(nodes) time and O(width) auxiliary space.
         """
@@ -39,7 +37,6 @@ class Solution:
         levelNodes = deque([root])
         nextLevelNodes = deque()
         result = 1
-
         while levelNodes or nextLevelNodes:
             while levelNodes:
                 node = levelNodes.popleft()
@@ -53,5 +50,4 @@ class Solution:
             nextLevelNodes = deque()
             level += 1
             levelSum = 0
-
         return result

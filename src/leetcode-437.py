@@ -7,6 +7,9 @@ Constraints:
  3. -1000 <= targetSum <= 1000
 """
 
+# TODO: Improve solution's time and space complexity.
+# TODO: Improve code cleanliness.
+
 from typing import Optional
 from functools import reduce
 
@@ -36,7 +39,6 @@ class Solution:
         node: TreeNode = root
         path: list[TreeNode] = []
         backtrack_points: list[int] = []
-
         # Preforms DF traversal, going to each leaf node in left-to-right order.
         while node or backtrack_points:
             # Traverses to the ith leaf node (in left-to-right order).
@@ -49,11 +51,9 @@ class Solution:
                 for i in range(len(path) - 1):
                     path_val -= path[i].val
                     result = result + 1 if path_val == target_sum else result
-            
             # Goes to the next possible downwards path to find the (i+1)th leaf
             # node in the next iteration.
             if len(backtrack_points) > 0:
                 path = path[0 : backtrack_points.pop()]
                 node = path[-1].right
-
         return result

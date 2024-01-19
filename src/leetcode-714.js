@@ -7,10 +7,12 @@
  *  3. 0 <= fee < 5 * 10^4
  */
 
+// TODO: Complete solution.
+
 /**
  * Imperative Dynamic Programming Solution
  *
- * Complexity: <time complexity> and <space complexity>.
+ * Complexity: <time> and <space> auxiliary space.
  */
 /**
  * @param {number[]} prices

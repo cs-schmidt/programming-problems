@@ -8,23 +8,23 @@
  *  4. The sortition must be stable.
  */
 
+// TODO: Improve solution's space complexity.
+// TODO: Complete this problem's "follow up" portion.
+// TODO: Double check your complexity analysis.
+
 /**
- * Iterative and Imperative Solution.
+ * Imperative and Iterative Solution
  *
  * Complexity: O(n) time and O(1) auxiliary space.
  */
 function moveZeroes(nums: number[]): void {
   let zeroIdx = nums.indexOf(0);
   let nonZeroIdx = zeroIdx;
-
   while (nums[nonZeroIdx] === 0 && nonZeroIdx < nums.length) nonZeroIdx += 1;
-
   if (zeroIdx === -1 || nonZeroIdx === nums.length) return;
-
   while (nonZeroIdx < nums.length) {
     nums[zeroIdx] = nums[nonZeroIdx];
     nums[nonZeroIdx] = 0;
-
     while (nums[zeroIdx] !== 0 && zeroIdx < nums.length) zeroIdx += 1;
     while (nums[nonZeroIdx] === 0 && nonZeroIdx < nums.length) nonZeroIdx += 1;
   }

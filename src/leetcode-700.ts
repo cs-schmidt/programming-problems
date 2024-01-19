@@ -8,14 +8,13 @@
  *  4. 1 <= val <= 10^7.
  */
 
+// TODO: Improve solution's time and space complexity.
+
 /** Definition of a binary tree node. */
 class TreeNode {
   val: number;
-
   left: TreeNode | null;
-
   right: TreeNode | null;
-
   constructor(
     val = 0,
     left: TreeNode | null = null,
@@ -28,12 +27,12 @@ class TreeNode {
 }
 
 /**
- * Recursive and Declarative Solution
+ * Declarative and Recursive Solution
  *
  * Process preforms preorder depth-first traversal with recursion, returning
  * the node with a matching value, or null otherwise.
  *
- * Complexity: O(nodes) and O(treeHeight) auxiliary space.
+ * Complexity: O(nodes) and O(height) auxiliary space.
  */
 function searchBST(root: TreeNode | null, val: number): TreeNode | null {
   if (!root) return null;

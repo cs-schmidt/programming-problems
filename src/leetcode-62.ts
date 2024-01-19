@@ -1,12 +1,14 @@
 /**
- * Problem 63: Unique Paths
+ * Problem 62: Unique Paths
  *
  * Constraints:
  *  1. 1 <= m, n <= 100
  */
 
+// TODO: Implement a solution that uses dynamic programming and memoization.
+
 /**
- * Iterative and Imperative Solution
+ * Imperative and Linearly Recursive Solution
  *
  * The solution exploits the fact that the number of unique paths from <0,0> to
  * <i,j> on a 2D grid, is equal to all the unique orderings of i down moves and
@@ -18,17 +20,14 @@
  */
 function uniquePaths(rows: number, cols: number): number {
   return (
-    factorial(rows - 1 + (cols - 1)) /
-    (factorial(rows - 1) * factorial(cols - 1))
+    factorial(rows + cols - 2) / (factorial(rows - 1) * factorial(cols - 1))
   );
 }
-
+// Utilities
+// =================================================================
 /**
- * Computes the factorial of a positive integer num.
- *
- * - A linear recursion process.
- * - Complexity: O(n) time and O(n) space.
- *
+ * Computes the factorial of a positive integer num. This process is a linear
+ * recursion: it uses O(n) time and O(n) space.
  * @param {number} num - A positive integer.
  * @returns {number}
  */

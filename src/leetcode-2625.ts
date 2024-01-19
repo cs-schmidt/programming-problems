@@ -17,7 +17,8 @@ function flat(arr: MultiDimensionalArray, n: number): MultiDimensionalArray {
   let depth = n;
   extractResult(arr);
   return result;
-
+  // Internal Procedures
+  // =================================================================
   function extractResult(currentArray: MultiDimensionalArray) {
     currentArray.forEach((value) => {
       if (value instanceof Array && depth > 0) {

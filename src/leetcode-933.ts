@@ -7,24 +7,21 @@
  *  3. At most 10^4 calls will be made to ping.
  */
 
+// TODO: Improve solution's time and space complexity.
+
 class RecentCounter {
   requests: number[];
-
   constructor() {
     this.requests = [];
   }
-
   ping(time: number): number {
     this.requests.push(time);
-
     let recentReqCount = 0;
     let i = this.requests.length - 1;
-
     while (this.requests[i] >= time - 3000 && this.requests[i] <= time) {
       recentReqCount += 1;
       i -= 1;
     }
-
     return recentReqCount;
   }
 }

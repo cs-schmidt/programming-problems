@@ -12,7 +12,7 @@ import heapq
 class Solution:
     def findKthLargest(self, nums: list[int], k: int) -> int:
         """
-        Iterative and Imperative Solution
+        Imperative and Iterative Solution
 
         Complexity: O(n) time and O(1) auxiliary space.
         """

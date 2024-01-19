@@ -32,7 +32,6 @@ function parseTernary(expr: string): string {
       if (expr[idx] === '?') qCount += 1;
       else if (expr[idx] === ':') cCount += 1;
     }
-
     // Now we check the value in the condition slot of the ternary expression.
     // This will help us restrict `lEdge` and `rEdge` to the next ternary
     // expression we'll evaluate in the next tick of the loop.
@@ -41,7 +40,6 @@ function parseTernary(expr: string): string {
       rEdge = idx - 1;
     } else lEdge = idx + 1;
   }
-
   // At this point `lEdge` should be equal to `rEdge`, so we just return the
   // value at that index in `expr`.
   return expr[lEdge];

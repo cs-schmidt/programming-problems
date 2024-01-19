@@ -8,7 +8,7 @@
  */
 
 /**
- * Iterative Solution
+ * Imperative and Linearly Iterative Solution
  *
  * The procedure works by finding the maximum sum amongst contiguous `k`-sized
  * subarrays of `nums`. Then we return the result divided by `k`.
@@ -19,16 +19,13 @@ function findMaxAverage(nums: number[], k: number): number {
   let maxSum = 0;
   let stepSum = 0;
   let stepEnd = k - 1;
-
   // Initialize `stepSum` and `maxSum`.
   for (let i = 0; i <= stepEnd; i++) stepSum += nums[i];
   maxSum = stepSum;
-
   while (stepEnd < nums.length - 1) {
     stepEnd += 1;
     stepSum += nums[stepEnd] - nums[stepEnd - k];
     if (stepSum > maxSum) maxSum = stepSum;
   }
-
   return maxSum / k;
 }

@@ -3,20 +3,23 @@
  *
  * Constraints:
  *  1. 1 <= s.length <= 30
- *  2. s consists of lowercase English letters, digits, and square brackets '[]'.
+ *  2. s consists of lowercase English letters, digits, and square brackets
+ *     '[]'.
  *  3. s is guaranteed to be a valid input.
  *  4. All the integers in s are in the range [1, 300].
  */
 
+// TODO: Improve solution's time and space complexity.
+// TODO: Improve code cleanliness.
+
 /**
- * Iterative and Imperative Solution
+ * Imperative and Iterative Solution
  *
  * Complexity: O(n) time and O(n) auxiliary space.
  */
 function decodeString(s: string): string {
   const multipliers: number[] = [1];
   const innerStrings: string[] = [''];
-
   let charIdx = 0;
   while (charIdx < s.length) {
     if (/[a-z]/.test(s[charIdx]))
@@ -37,9 +40,7 @@ function decodeString(s: string): string {
       }
       continue;
     }
-
     charIdx += 1;
   }
-
   return innerStrings[0];
 }

@@ -8,16 +8,21 @@
  *
  */
 
+// TODO: Improve solution's time and space complexity.
+
+/**
+ * Imperative and Iterative Solution
+ *
+ * Complexity: <time> and <space> auxiliary complexity.
+ */
 function longestPalindrome(s: string): number {
   let result = 0;
   const charFreqs: { [key: string]: number } = {};
   let maxOddFreqs = 0;
-
   for (const char of s) {
     if (char in charFreqs) charFreqs[char] += 1;
     else charFreqs[char] = 1;
   }
-
   for (const freq of Object.values(charFreqs)) {
     if (freq % 2 === 0) {
       result += freq;
@@ -31,6 +36,5 @@ function longestPalindrome(s: string): number {
       result += freq - 1;
     }
   }
-
   return result;
 }

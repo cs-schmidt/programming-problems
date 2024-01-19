@@ -6,8 +6,11 @@
  *  2. 1 <= n <= 60
  */
 
+// TODO: Try to understand the selection algorithm.
+// TODO: Improve solution's space complexity.
+
 /**
- * Iterative and Imperative Solution
+ * Declarative and Recursive Solution
  *
  * Complexity: O([n choose k]) time and O([n choose k]) auxiliary space.
  */
@@ -17,7 +20,7 @@ function combinationSum3(k: number, n: number): number[][] {
   );
 }
 
-// Additional Procedures
+// Utilities
 // =================================================================
 /**
  * Finds all the k-length combinations of the numbers {9, 8, ..., 1}, in
@@ -25,10 +28,12 @@ function combinationSum3(k: number, n: number): number[][] {
  * @param {number} k - The length of combination.
  * @return {number[][]}
  */
-// TODO: Revisit this problem, try to understand the selection algorithm.
 function generateCombinations(k: number): number[][] {
   const result: number[][] = [];
-
+  generateCombinationHelper([], 1);
+  return result;
+  // Internal Procedures
+  // =================================================================
   function generateCombinationHelper(
     currentCombination: number[],
     start: number
@@ -38,28 +43,10 @@ function generateCombinations(k: number): number[][] {
       currentCombination.reverse();
       return;
     }
-
     for (let i = 9; i >= start; i--) {
       currentCombination.push(i);
       generateCombinationHelper(currentCombination, i + 1);
       currentCombination.pop();
     }
   }
-
-  generateCombinationHelper([], 1);
-
-  return result;
-}
-
-/**
- * Computes the sum of positive integers up to and including the input.
- * @param {number} num - A positive integer (i.e., a natural number).
- * @return {number} A positive integer or NaN if the sum can't be computed.
- */
-function naturalSum(num: number): number {
-  return !Number.isInteger(num) ||
-    num < 1 ||
-    Math.abs(num) > Number.MAX_SAFE_INTEGER
-    ? NaN
-    : (num * (num / 2)) / 2;
 }

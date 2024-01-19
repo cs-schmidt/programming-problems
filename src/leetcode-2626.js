@@ -8,7 +8,7 @@
  */
 
 /**
- * Declarative and Iterative Solution
+ * Declarative and Linearly Iterative Solution
  *
  * Complexity: O(n) time and O(1) auxiliary space.
  */

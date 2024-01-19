@@ -18,7 +18,7 @@
  *     of the subscription made before.
  */
 
-// TODO: Improve the performance of this solution.
+// TODO: Improve solution's time and space complexity.
 
 type Subscription = { unsubscribe(): void };
 type Callback = (...args: unknown[]) => unknown;
@@ -30,7 +30,6 @@ class EventEmitter {
     if (Object.hasOwn(this.listeners, name)) this.listeners[name].push(fn);
     else this.listeners[name] = [fn];
     const index = this.listeners[name].length - 1;
-    console.log(this.listeners);
     return {
       unsubscribe: () => {
         delete this.listeners[name][index];

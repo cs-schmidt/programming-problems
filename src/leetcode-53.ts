@@ -6,10 +6,10 @@
  *  2. -10^4 <= nums[i] <= 10^4
  */
 
-// TODO: Write a solution with the divide-and-conquer approach.
+// TODO: Complete this problem's "follow up" portion.
 
 /**
- * Iterative Solution.
+ * Imperative and Linearly Iterative Solution
  *
  * This is an implementation of Kadane's algorithm. The process is a linear
  * iteration where we go over each value in `nums` and assesses two variables:
@@ -25,14 +25,11 @@
  */
 function maxSubArray(nums: number[]): number {
   let maxThusFound = nums[0];
-  let maxOnCurrVal = 0;
-
-  for (const val of nums) {
-    maxOnCurrVal += val;
-
-    if (maxOnCurrVal > maxThusFound) maxThusFound = maxOnCurrVal;
-    if (maxOnCurrVal < 0) maxOnCurrVal = 0;
-  }
-
+  let maxOnCurrNum = 0;
+  nums.forEach((num) => {
+    maxOnCurrNum += num;
+    if (maxOnCurrNum > maxThusFound) maxThusFound = maxOnCurrNum;
+    if (maxOnCurrNum < 0) maxOnCurrNum = 0;
+  });
   return maxThusFound;
 }

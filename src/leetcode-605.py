@@ -2,12 +2,13 @@
 Problem 605: Can Place Flowers
 
 Constraints:
-
  1. 1 <= flowerbed.length <= 2 * 10^4
  2. flowerbed[i] is 0 or 1
  3. There are no two adjacent flowers in flowerbed
  4. 0 <= n <= flowerbed.length
 """
+
+# TODO: Improve solution's time complexity.
 
 import math
 
@@ -33,7 +34,6 @@ class Solution:
         spaces_found: int = 0
         i: int = 0
         j: int = 0
-
         # Given `n != 0`, continue while the potential valid spaces left in
         # `flowerbed` is greater than or equal to how many more spaces we need
         # to check before making a conclusion.
@@ -56,14 +56,12 @@ class Solution:
                 # flowerbed[i] == 1` and (3) `i < len(flowerbed)`. Add on the
                 # valid spaces discovered and proceed.
                 spaces_found += math.floor(i / 2)
-
             # Handles assessment of any inner gaps and the remaining right-most
             # edge gap.
             j = i + 1
             while j < len(flowerbed) and flowerbed[j] == 0:
                 # Check if the amount of valid spaces in the current gap is
                 # sufficient (presuming it's an inner gap).
-
                 if math.ceil((j - i - 2) / 2) >= n - spaces_found:
                     return True
                 j += 1
@@ -73,7 +71,6 @@ class Solution:
                 if flowerbed[j - 1] == 0:
                     return math.floor((j - i - 1) / 2) >= n - spaces_found
                 return math.floor((j - i - 2) / 2) >= n - spaces_found
-
             # Making it to this line implies that (1) we didn't have enough
             # information in the above assessment to make a conclusion, (2)
             # `flowerbed[j] == 1`, and (3) `j < len(flowerbed)`. Add on the
@@ -81,7 +78,6 @@ class Solution:
             # update `i`.
             spaces_found += math.floor((j - i - 2) / 2)
             i = j
-
         # Making it to this line implies that the number of spaces left in
         # `flowerbed` is insuffcient to produce enough valid spaces, so we
         # return `False`.

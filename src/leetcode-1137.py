@@ -10,20 +10,15 @@ Constraints:
 class Solution:
     def tribonacci(self, n: int) -> int:
         """
-        Iterative and Imperative Solution
+        Imperative and Dynamic Programming Solution
 
         Complexity: O(n) time and O(1) auxiliary space.
         """
-        # Contains the components that sum to the current tribonacci number.
         tribNumParts: list[int] = [0, 1, 1]
-
-        if n < 3:
-            return tribNumParts[n]
-
+        if n < 3: return tribNumParts[n]
         for _ in range(n - 2):
             nextTribNum = sum(tribNumParts)
             tribNumParts[0] = tribNumParts[1]
             tribNumParts[1] = tribNumParts[2]
             tribNumParts[2] = nextTribNum
-
         return tribNumParts[-1]

@@ -3,6 +3,7 @@ overrides:
   # JS-type files.
   - files: ['src/**/*.{js,mjs,cjs}']
     env:
+      node: true
       es2022: true
     parserOptions:
       ecmaVersion: 'latest'
@@ -35,6 +36,8 @@ overrides:
         - 'off'
       no-loop-func:
         - 'warn'
+      no-restricted-syntax:
+        - 'off'
   # TS-type files.
   - files: ['src/**/*.{ts,mts,cts}']
     env:

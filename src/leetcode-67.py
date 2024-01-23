@@ -7,8 +7,9 @@ Constraints:
  3. Each string does not contain leading zeros except for the zero itself.
 """
 
-# TDOO: Complete solution.
 # TODO: Improve solution's time and space complexity.
+
+import math
 
 
 class Solution:
@@ -18,18 +19,26 @@ class Solution:
 
         Complexity: O(max(|a|,|b|)) time and O(1) auxiliary space.
         """
-        if len(a) < len(b):
-            a = ("0" * (len(b) - len(a))) + a
+        result: str = ""
+        bit_place: int = -1
+        bit_carry: int = 0
+        while abs(bit_place) <= min(len(a), len(b)):
+            bit_sum = int(a[bit_place]) + int(b[bit_place]) + bit_carry
+            result = str(bit_sum % 2) + result
+            bit_carry = math.floor(bit_sum / 2)
+            bit_place -= 1
+        if len(a) > len(b):
+            while abs(bit_place) <= len(a):
+                bit_sum = int(a[bit_place]) + bit_carry
+                result = str(bit_sum % 2) + result
+                bit_carry = math.floor(bit_sum / 2)
+                bit_place -= 1
         else:
-            b = ("0" * (len(a) - len(b))) + b
-        result = "0"
-        index = 0
-        while index < len(a):
-            if int(a[index]) + int(b[index]) == 2:
-                result[-1] = "1"
-                result.append("0")
-            elif int(a[index]) + int(b[index]) == 1:
-                result[-1] = "1"
-            else:
-                result[-1] = "0"
+            while abs(bit_place) <= len(b):
+                bit_sum = int(b[bit_place]) + bit_carry
+                result = str(bit_sum % 2) + result
+                bit_carry = math.floor(bit_sum / 2)
+                bit_place -= 1
+        if bit_carry:
+            result = str(bit_carry) + result
         return result

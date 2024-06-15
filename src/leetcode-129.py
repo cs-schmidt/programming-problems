@@ -7,8 +7,9 @@ Constraints:
  3. The depth of the tree will not exceed 10.
 """
 
-from typing import Optional, Union
-from math import log10, floor
+# TODO: Complete solution.
+
+from typing import Optional
 
 
 class TreeNode:
@@ -26,45 +27,10 @@ class TreeNode:
 
 
 class Solution:
-    def sumNumbers(self, root: TreeNode) -> int:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
         """
         Imperative and Iterative Solution
 
         Complexity: O(nodes) time and O(height) auxiliary space.
         """
-        result: int = 0
-        node: Optional[TreeNode] = root
-        level: int = 0
-        unvisited: [(TreeNode, int)] = []
-        pathValue: int = 0
-        while node:
-            while node:
-                print([node.val, level])
-                pathValue = append_digit(pathValue, node.val)
-                level += 1
-                if node.left and node.right:
-                    unvisited.append((node.right, level))
-                    node = node.left
-                elif node.left:
-                    node = node.left
-                else:
-                    node = node.right
-            print(pathValue)
-            print(bool(unvisited))
-            result += pathValue
-            if unvisited:
-                node, level = unvisited.pop()
-                pathValue = truncate_num(pathValue, level - 1)
-        return result
-
-
-# Utilities
-# =================================================================
-def truncate_num(num: Union[int, float], digitIndex: int = 0) -> int:
-    """Returns 'num' truncated to 'digitIndex'."""
-    return floor(num / (10 ** (floor(log10(num)) - digitIndex)))
-
-
-def append_digit(base: int, digit: int) -> int:
-    """Returns 'base' with 'digit' appended to the end."""
-    return 10 * base + digit
+        

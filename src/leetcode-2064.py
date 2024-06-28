@@ -6,21 +6,21 @@ Constraints:
  2. 1 <= quantities[i] <= 10^5
 """
 
-from math import ceil, floor
+from math import ceil
 
 
 class Solution:
 
     def minimizedMaximum(self, n: int, quantities: list[int]) -> int:
         """
-        Imperative, Iterative, and Impure Solution
+        Imperative, Iterative, and Pure Solution
 
         Time complexity: O(log(max(quantities))*|quantities|).
         Space complexity: O(1) auxiliary space.
         """
 
         # Internal Functions
-        # ************************************************************
+        # ************************************************** 
         def is_distributable(x: int) -> bool:
             """
             Checks if `x` is a "potential solution".
@@ -28,20 +28,17 @@ class Solution:
             Time complexity: O(|quantities|)
             Space complexity:  O(1) auxiliary space.
             """
-            x_partitions: int = 0
-            for num in quantities:
-                quotient_remainder_pair: list[int] = divmod(num, x)
-                x_partitions += quotient_remainder_pair[0]
-                if quotient_remainder_pair[1] > 0:
-                    x_partitions += 1
-            return x_partitions <= n
+            quotient_ceiling_sum: int = 0
+            for q in quantities: 
+                quotient_ceiling_sum += ceil(q / x)
+            return quotient_ceiling_sum <= n
 
-        # Function Logic
-        # ************************************************************
+        # Main Logic
+        # ************************************************** 
         high: int = max(quantities)
         low: int = ceil(sum(quantities) / n)
         while high != low:
-            mid: int = floor((low + high) / 2)
+            mid: int = (low + high) // 2
             if is_distributable(mid):
                 high = mid
             else:

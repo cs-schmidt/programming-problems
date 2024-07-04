@@ -21,61 +21,77 @@ function totalCost(costs: number[], k: number, candidates: number): number {
   lowerHeapify(costs, lowerSize);
   upperHeapify(costs, upperSize);
   while (k--) {
-    // Compare lowerHeap min and upperHeap min.
     if (costs.at(lowerSize - 1) <= costs.at(-upperSize)) {
       result += costs.at(lowerSize - 1);
       costs.splice(lowerSize - 1, 1);
-      if (lowerSize + upperSize < costs.length) lowerSift(costs, lowerSize);
-      else lowerSize -= 1;
+      if (lowerSize + upperSize > costs.length) lowerSize -= 1;
+      lowerSift(costs, lowerSize);
     } else {
       result += costs.at(-upperSize);
       costs.splice(-upperSize, 1);
-      if (lowerSize + upperSize < costs.length) upperSift(costs, upperSize);
-      else upperSize -= 1;
+      if (lowerSize + upperSize > costs.length) upperSize -= 1;
+      upperSift(costs, upperSize);
     }
   }
   return result;
 
   // Internal Helper Functions
   // **************************************************
-  function lowerHeapify(nums: number[], size: number) {
-    const startIndex: number = 0; // TODO: Fix this value.
-    for (let i: number = startIndex; i <= size - 1; i++)
-      lowerSift(nums, size, i);
+  /** Transform `nums` into a min-heap down from index `size - 1` to 0. */
+  function lowerHeapify(nums: number[], size: number): void {
+    let offset: number = -Math.floor(size / 2);
+    while (offset <= -1) lowerSift(nums, size, offset++);
   }
 
-  function upperHeapify(nums: number[], size: number) {
-    const startIndex: number = 0; // TODO: Fix this value.
-    for (let i: number = startIndex; i >= nums.length - size; i--)
-      upperSift(nums, size, i);
+  /** Transform `nums` into a min-heap from index `-size` to the last index. */
+  function upperHeapify(nums: number[], size: number): void {
+    let offset: number = Math.floor((size - 1) / 2);
+    while (offset >= 0) upperSift(nums, size, offset--);
   }
 
-  function lowerSift(nums: number[], size: number, offset: number = 0): void {
-    const minIndex: number = size - 1 - offset;
-    const leftIndex: number = size - 1 - 2 * offset - 1;
-    const rightIndex: number = size - 1 - 2 * offset - 2;
+  /**
+   * Preforms a siftDown operation for a heap who's rightmost member is the top.
+   */
+  function lowerSift(nums: number[], size: number, offset: number = -1): void {
+    let minIdx: number = size + offset;
+    let leftIdx: number = size + 2 * offset;
+    let rightIdx: number = size + 2 * offset - 1;
     while (true) {
-      if (nums[leftIndex] < nums[minIndex] && offset > size)
-        nums[minIndex] = nums[leftIndex];
-      if (nums[rightIndex] < nums[minIndex] && offset > size)
-        nums[minIndex] = nums[rightIndex];
-      if (minIndex !== offset) {
-        [nums[minIndex], nums[offset]] = [nums[offset], nums[minIndex]];
-        offset = minIndex;
+      if (leftIdx >= 0 && nums[leftIdx] < nums[minIdx]) minIdx = leftIdx;
+      if (rightIdx >= 0 && nums[rightIdx] < nums[minIdx]) minIdx = rightIdx;
+      if (minIdx !== size + offset) {
+        [nums[minIdx], nums[size + offset]] = [
+          nums[size + offset],
+          nums[minIdx]
+        ];
+        offset = minIdx - size;
+        leftIdx = size + 2 * offset;
+        rightIdx = size + 2 * offset - 1;
       } else break;
     }
   }
 
-  function upperSift(
-    nums: number[],
-    size: number,
-    index: number = nums.length - size
-  ): void {
-    const minIndex: number = index;
-    const leftIndex: number = 0;
-    const rightIndex: number = 0;
+  /**
+   * Preforms a siftDown operation for a heap who's leftmost member is the top.
+   */
+  function upperSift(nums: number[], size: number, offset: number = 0): void {
+    let minIdx: number = nums.length - size + offset;
+    let leftIdx: number = nums.length - size + 2 * offset + 1;
+    let rightIdx: number = nums.length - size + 2 * offset + 2;
     while (true) {
-      // TODO Implement this part.
+      if (leftIdx < nums.length && nums[leftIdx] < nums[minIdx])
+        minIdx = leftIdx;
+      if (rightIdx < nums.length && nums[rightIdx] < nums[minIdx])
+        minIdx = rightIdx;
+      if (minIdx !== nums.length - size + offset) {
+        [nums[minIdx], nums[nums.length - size + offset]] = [
+          nums[nums.length - size + offset],
+          nums[minIdx]
+        ];
+        offset = minIdx - (nums.length - size);
+        leftIdx = nums.length - size + 2 * offset + 1;
+        rightIdx = nums.length - size + 2 * offset + 2;
+      } else break;
     }
   }
 }

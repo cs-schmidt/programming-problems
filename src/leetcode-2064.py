@@ -20,7 +20,7 @@ class Solution:
         """
 
         # Internal Functions
-        # ************************************************** 
+        # **************************************************
         def is_distributable(x: int) -> bool:
             """
             Checks if `x` is a "potential solution".
@@ -29,12 +29,12 @@ class Solution:
             Space complexity:  O(1) auxiliary space.
             """
             quotient_ceiling_sum: int = 0
-            for q in quantities: 
+            for q in quantities:
                 quotient_ceiling_sum += ceil(q / x)
             return quotient_ceiling_sum <= n
 
         # Main Logic
-        # ************************************************** 
+        # **************************************************
         high: int = max(quantities)
         low: int = ceil(sum(quantities) / n)
         while high != low:

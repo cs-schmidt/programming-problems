@@ -2,9 +2,8 @@
  * Problem 2462: Total Cost to Hire K Workers
  *
  * Constraints:
- *  1. 1 <= costs.length <= 10^5
- *  2. 1 <= costs[i] <= 10^5
- *  3. 1 <= k, candidates <= costs.length
+ *  1. 1 <= costs.length, costs[i] <= 10^5
+ *  2. 1 <= k, candidates <= costs.length
  */
 
 // TODO: Complete solution.
@@ -12,89 +11,71 @@
 /**
  * Imperative, Iterative, and Impure Solution
  *
- * Time complexity: O(k * log(min{candidates + k - 1, |costs|})).
- * Space complexity: O(1).
+ * Time complexity: O(min{k*log(candidates), candidates}).
+ * Space complexity: O(1) auxiliary space.
  */
 function totalCost(costs: number[], k: number, candidates: number): number {
   let result: number = 0;
-  let leftSize: number = Math.min(candidates + k - 1, costs.length);
-  let rightSize: number = Math.min(costs.length - leftSize, candidates + k - 1);
-
-  console.log(`Left size: ${leftSize}`);
-  console.log(`Right size: ${rightSize}`);
-
-  buildLeftHeap(costs, leftSize);
-  buildRightHeap(costs, rightSize);
-
-  console.log(costs);
-
-  while (k) {
-    console.log(`Iteration ${k}:`);
-    if (costs.at(0) <= costs.at(-1)) {
-      result += costs.shift();
-      leftSize -= 1;
+  let lowerSize: number = candidates;
+  let upperSize: number = Math.min(costs.length - candidates, candidates);
+  lowerHeapify(costs, lowerSize);
+  upperHeapify(costs, upperSize);
+  while (k--) {
+    // Compare lowerHeap min and upperHeap min.
+    if (costs.at(lowerSize - 1) <= costs.at(-upperSize)) {
+      result += costs.at(lowerSize - 1);
+      costs.splice(lowerSize - 1, 1);
+      if (lowerSize + upperSize < costs.length) lowerSift(costs, lowerSize);
+      else lowerSize -= 1;
     } else {
-      result += costs.pop();
-      rightSize -= 1;
+      result += costs.at(-upperSize);
+      costs.splice(-upperSize, 1);
+      if (lowerSize + upperSize < costs.length) upperSift(costs, upperSize);
+      else upperSize -= 1;
     }
-
-    siftDownLeft(costs, leftSize);
-    siftDownRight(costs, rightSize);
-
-    k -= 1;
   }
-
   return result;
 
   // Internal Helper Functions
   // **************************************************
-  function buildLeftHeap(nums: number[], size: number) {
-    const startIdx: number = Math.floor(size - 1 / 2) - 1;
-    for (let i: number = startIdx; i >= 0; i--) siftDownLeft(nums, size, i);
+  function lowerHeapify(nums: number[], size: number) {
+    const startIndex: number = 0; // TODO: Fix this value.
+    for (let i: number = startIndex; i <= size - 1; i++)
+      lowerSift(nums, size, i);
   }
 
-  function buildRightHeap(nums: number[], size: number) {
-    const endIdx: number = -Math.floor(size / 2);
-    for (let i: number = endIdx; i <= -1; i++) siftDownRight(nums, size, i);
+  function upperHeapify(nums: number[], size: number) {
+    const startIndex: number = 0; // TODO: Fix this value.
+    for (let i: number = startIndex; i >= nums.length - size; i--)
+      upperSift(nums, size, i);
   }
 
-  function siftDownLeft(nums: number[], size: number, idx: number = 0): void {
-    let minIdx: number = idx;
-    let leftIdx: number = 2 * idx + 1;
-    let rightIdx: number = 2 * idx + 2;
-
+  function lowerSift(nums: number[], size: number, offset: number = 0): void {
+    const minIndex: number = size - 1 - offset;
+    const leftIndex: number = size - 1 - 2 * offset - 1;
+    const rightIndex: number = size - 1 - 2 * offset - 2;
     while (true) {
-      if (nums[leftIdx] < nums[minIdx] && leftIdx < size) minIdx = leftIdx;
-      if (nums[rightIdx] < nums[minIdx] && rightIdx < size) minIdx = rightIdx;
-      if (minIdx !== idx) {
-        [nums[minIdx], nums[idx]] = [nums[idx], nums[minIdx]];
-        idx = minIdx;
-        leftIdx = 2 * idx + 1;
-        rightIdx = 2 * idx + 2;
+      if (nums[leftIndex] < nums[minIndex] && offset > size)
+        nums[minIndex] = nums[leftIndex];
+      if (nums[rightIndex] < nums[minIndex] && offset > size)
+        nums[minIndex] = nums[rightIndex];
+      if (minIndex !== offset) {
+        [nums[minIndex], nums[offset]] = [nums[offset], nums[minIndex]];
+        offset = minIndex;
       } else break;
     }
   }
 
-  function siftDownRight(nums: number[], size: number, idx: number = -1): void {
-    let minIdx: number = idx;
-    let leftIdx: number = 2 * idx;
-    let rightIdx: number = 2 * idx - 1;
-
+  function upperSift(
+    nums: number[],
+    size: number,
+    index: number = nums.length - size
+  ): void {
+    const minIndex: number = index;
+    const leftIndex: number = 0;
+    const rightIndex: number = 0;
     while (true) {
-      if (nums.at(leftIdx) < nums.at(minIdx) && leftIdx >= -size)
-        minIdx = leftIdx;
-      if (nums.at(rightIdx) < nums.at(minIdx) && rightIdx >= -size)
-        minIdx = rightIdx;
-      if (minIdx !== idx) {
-        const len: number = nums.length;
-        [nums[len + minIdx], nums[len + idx]] = [
-          nums[len + idx],
-          nums[len + minIdx]
-        ];
-        idx = minIdx;
-        leftIdx = 2 * idx;
-        rightIdx = 2 * idx - 1;
-      } else break;
+      // TODO Implement this part.
     }
   }
 }

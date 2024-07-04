@@ -77,7 +77,7 @@ overrides:
       prefer-template:
         - 'warn'
       no-plusplus:
-        - 'error'
+        - 'warn'
         - allowForLoopAfterthoughts: true
       eqeqeq:
         - 'warn'

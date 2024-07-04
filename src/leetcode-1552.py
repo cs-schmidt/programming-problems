@@ -21,12 +21,9 @@ class Solution:
         Space complexity: O(1) auxiliary space.
         """
         position.sort()
-        gaps: list[int] = [
-            position[i + 1] - position[i] for i in range(len(position) - 2)
-        ]
-
-        # gap_num = len(position) - 1 / m - 1
-        # gap_max = ceil(gap_num)
-        # We solve the following system of linear equations:
-        #  (1): gap_num(x) + gap_max(y) = sum(position)
-        #  (2):         x  +         y  = m - 1
+        # I see the following strategies (which may be used in tandem) for this
+        # problem:
+        # 
+        #  - Binary Search
+        #  - Greedy Search
+        #  - Sliding Window 

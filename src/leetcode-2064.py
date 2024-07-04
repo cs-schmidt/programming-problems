@@ -19,7 +19,7 @@ class Solution:
         Space complexity: O(1) auxiliary space.
         """
 
-        # Internal Functions
+        # Internal Helper Functions
         # **************************************************
         def is_distributable(x: int) -> bool:
             """

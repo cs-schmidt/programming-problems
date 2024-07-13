@@ -24,6 +24,11 @@ class Solution:
         # Internal Helpers
         # ************************************************************
         def max_neighbor_gap(gaps: list[int], neighbor_spaces: int):
+            """
+            Finds the maximum gap possible between two neighbors given the
+            available `gaps` the number of spaces there must be between
+            neighbors.
+            """
             slice_size: int = len(gaps) - (neighbor_spaces - 1)
             slice_sum: int = sum(islice(gaps, slice_size))
             result: int = slice_sum
@@ -32,8 +37,31 @@ class Solution:
                 result = max(result, slice_sum)
             return result
 
-        def last_index(arr: list) -> int:
-            return len(arr) - 1 if arr else 0
+        def find_nearset_slice(nums: list[int], val: int) -> tuple[int, int, int]:
+            """Returns the leftmost slice in `nums` whose sum is closest to `val`."""
+            slice_sum = nums[0]
+            slice_tail = 0
+            slice_head = 0
+            # TODO: Implement this portion.
+            return (slice_sum, slice_tail, slice_head)
+
+        def count_rear_spaces(target: int, nums: list[int], end: int) -> int:
+            """
+            Returns the number of non-overlapping slices from the start of
+            `nums` up to (but excluding) index `end` that sum to a value x >=
+            `target`.
+            """
+            # TODO: Implement this portion.
+            return 0
+
+        def count_forward_spaces(target: int, nums: list[int], start: int) -> int:
+            """
+            Returns the number of non-overlapping slices from beginning from
+            index `start + 1` in `nums` up to (but excluding) index `end` that
+            sum to a value x >= `target`.
+            """
+            # TODO: Implement this portion.
+            return 0
 
         # Main Logic
         # ************************************************************
@@ -43,28 +71,6 @@ class Solution:
         min_gap_size = min(gaps)
         max_gap_size = max_neighbor_gap(gaps, m - 1)
         while min_gap_size < max_gap_size:
-            # Find the firsts slice on `gaps` whose sum is closest to the
-            # midpoint between `min_gap_size` and `max_gap_size`.
             mid_gap_size = (min_gap_size + max_gap_size) // 2
-            slice_sum = gaps[0]
-            slice_head = 0
-            slice_tail = 0
-            nearest_slice_sum = 0
-            nearest_slice_head = 0
-            nearest_slice_tail = 0
-            while slice_sum != mid_gap_size and slice_head < last_index(gaps):
-                # TODO: Implement this part.
-                a
-            # Check if `nearest_slice_sum` is a possible solution.
-            rear_gaps = 0  # TODO: Initalize this.
-            front_gaps = 0  # List of <gap_tail, gap_size> pairs.
-            while (
-                rear_gaps + front_gaps + 1 < m - 1
-                and nearest_slice_head < last_index(gaps)
-            ):
-                # TODO: Implement this part.
-                a
-            if rear_gaps + front_gaps + 1 == m - 1:
-                min_gap_size = nearest_slice_sum + 1
-                result = nearest_slice_sum
+            slice_sum, slice_tail, slice_head = find_nearset_slice(gaps, mid_gap_size)
         return result

@@ -23,13 +23,13 @@ class Solution:
 
         # Internal Helpers
         # ************************************************************
-        def max_neighbor_gap(gaps: list[int], neighbor_spaces: int):
+        def max_neighbor_gap_size(gaps: list[int], neighbor_gap_count: int):
             """
             Finds the maximum gap possible between two neighbors given the
             available `gaps` the number of spaces there must be between
             neighbors.
             """
-            slice_size: int = len(gaps) - (neighbor_spaces - 1)
+            slice_size: int = len(gaps) - (neighbor_gap_count - 1)
             slice_sum: int = sum(islice(gaps, slice_size))
             result: int = slice_sum
             for i in range(len(gaps) - slice_size):
@@ -37,40 +37,32 @@ class Solution:
                 result = max(result, slice_sum)
             return result
 
-        def find_nearset_slice(nums: list[int], val: int) -> tuple[int, int, int]:
-            """Returns the leftmost slice in `nums` whose sum is closest to `val`."""
-            slice_sum = nums[0]
-            slice_tail = 0
-            slice_head = 0
-            # TODO: Implement this portion.
-            return (slice_sum, slice_tail, slice_head)
-
-        def count_rear_spaces(target: int, nums: list[int], end: int) -> int:
+        def gaps_fit(size: int, count: int, gaps: list[int]) -> bool:
             """
-            Returns the number of non-overlapping slices from the start of
-            `nums` up to (but excluding) index `end` that sum to a value x >=
-            `target`.
+            Confirms if `gaps` contains at least `gap_count` or more slices of
+            size `gap_size` or more.
             """
-            # TODO: Implement this portion.
-            return 0
-
-        def count_forward_spaces(target: int, nums: list[int], start: int) -> int:
-            """
-            Returns the number of non-overlapping slices from beginning from
-            index `start + 1` in `nums` up to (but excluding) index `end` that
-            sum to a value x >= `target`.
-            """
-            # TODO: Implement this portion.
-            return 0
+            counted_gaps = 0
+            current_gap_size = 0
+            for i in range(len(gaps)):
+                current_gap_size += gaps[i]
+                if current_gap_size >= size:
+                    counted_gaps += 1
+                    current_gap_size = 0
+                    if counted_gaps == count:
+                        return True
+            return False
 
         # Main Logic
         # ************************************************************
-        result = 0
         position.sort()
         gaps = [position[i + 1] - position[i] for i in range(len(position) - 1)]
         min_gap_size = min(gaps)
-        max_gap_size = max_neighbor_gap(gaps, m - 1)
+        max_gap_size = max_neighbor_gap_size(gaps, m - 1)
         while min_gap_size < max_gap_size:
             mid_gap_size = (min_gap_size + max_gap_size) // 2
-            slice_sum, slice_tail, slice_head = find_nearset_slice(gaps, mid_gap_size)
-        return result
+            if gaps_fit(mid_gap_size, m - 1, gaps):
+                min_gap_size = mid_gap_size
+            else:
+                max_gap_size = mid_gap_size - 1
+        return min_gap_size

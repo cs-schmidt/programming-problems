@@ -7,7 +7,10 @@ Constraints:
  3. position[i] != position[j] for all i,j where i != j.
 """
 
+# TODO: Improve solution performance.
+
 from math import ceil
+
 
 class Solution:
     def maxDistance(self, position: list[int], m: int) -> int:
@@ -30,7 +33,8 @@ class Solution:
             result: int = 0
             gap: int = 0
             gap_points: int = len(line_coords) - selections + 2
-            for i in range(1, gap_points): gap += line_coords[i] - line_coords[i - 1]
+            for i in range(1, gap_points):
+                gap += line_coords[i] - line_coords[i - 1]
             result = gap
             for i in range(gap_points, len(line_coords)):
                 gap -= line_coords[i - gap_points + 1] - line_coords[i - gap_points]
@@ -46,7 +50,8 @@ class Solution:
                 if current_gap >= target_gap:
                     gap_count += 1
                     current_gap = 0
-                    if gap_count == amount: return True
+                    if gap_count == amount:
+                        return True
             return False
 
         # Main Logic
@@ -56,6 +61,8 @@ class Solution:
         max_gap: int = find_max_gap(position, m)
         while min_gap < max_gap:
             mid_gap: int = ceil((min_gap + max_gap) / 2)
-            if gaps_fit(position, mid_gap, m - 1): min_gap = mid_gap
-            else: max_gap = mid_gap - 1
+            if gaps_fit(position, mid_gap, m - 1):
+                min_gap = mid_gap
+            else:
+                max_gap = mid_gap - 1
         return min_gap

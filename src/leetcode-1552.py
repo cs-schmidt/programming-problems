@@ -7,10 +7,7 @@ Constraints:
  3. position[i] != position[j] for all i,j where i != j.
 """
 
-# TODO: Complete solution.
-
-from itertools import islice
-
+from math import ceil
 
 class Solution:
     def maxDistance(self, position: list[int], m: int) -> int:
@@ -18,51 +15,47 @@ class Solution:
         Imperative, Iterative, and Impure Solution
 
         Time complexity: O(|position|*log(|position|).
-        Space complexity: O(|position|) auxiliary space.
+        Space complexity: O(1) auxiliary space.
         """
 
         # Internal Helpers
         # ************************************************************
-        def max_neighbor_gap_size(gaps: list[int], neighbor_gap_count: int):
-            """
-            Finds the maximum gap possible between two neighbors given the
-            available `gaps` the number of spaces there must be between
-            neighbors.
-            """
-            slice_size: int = len(gaps) - (neighbor_gap_count - 1)
-            slice_sum: int = sum(islice(gaps, slice_size))
-            result: int = slice_sum
-            for i in range(len(gaps) - slice_size):
-                slice_sum += gaps[slice_size + i] - gaps[i]
-                result = max(result, slice_sum)
+        def find_min_gap(line_coords: list[int]) -> int:
+            result: int = line_coords[1] - line_coords[0]
+            for i in range(2, len(line_coords)):
+                result = min(result, line_coords[i] - line_coords[i - 1])
             return result
 
-        def gaps_fit(size: int, count: int, gaps: list[int]) -> bool:
-            """
-            Confirms if `gaps` contains at least `gap_count` or more slices of
-            size `gap_size` or more.
-            """
-            counted_gaps = 0
-            current_gap_size = 0
-            for i in range(len(gaps)):
-                current_gap_size += gaps[i]
-                if current_gap_size >= size:
-                    counted_gaps += 1
-                    current_gap_size = 0
-                    if counted_gaps == count:
-                        return True
+        def find_max_gap(line_coords: list[int], selections: int) -> int:
+            result: int = 0
+            gap: int = 0
+            gap_points: int = len(line_coords) - selections + 2
+            for i in range(1, gap_points): gap += line_coords[i] - line_coords[i - 1]
+            result = gap
+            for i in range(gap_points, len(line_coords)):
+                gap -= line_coords[i - gap_points + 1] - line_coords[i - gap_points]
+                gap += line_coords[i] - line_coords[i - 1]
+                result = max(result, gap)
+            return result
+
+        def gaps_fit(line_coords: list[int], target_gap: int, amount: int) -> bool:
+            gap_count: int = 0
+            current_gap: int = 0
+            for i in range(len(line_coords) - 1):
+                current_gap += line_coords[i + 1] - line_coords[i]
+                if current_gap >= target_gap:
+                    gap_count += 1
+                    current_gap = 0
+                    if gap_count == amount: return True
             return False
 
         # Main Logic
         # ************************************************************
         position.sort()
-        gaps = [position[i + 1] - position[i] for i in range(len(position) - 1)]
-        min_gap_size = min(gaps)
-        max_gap_size = max_neighbor_gap_size(gaps, m - 1)
-        while min_gap_size < max_gap_size:
-            mid_gap_size = (min_gap_size + max_gap_size) // 2
-            if gaps_fit(mid_gap_size, m - 1, gaps):
-                min_gap_size = mid_gap_size
-            else:
-                max_gap_size = mid_gap_size - 1
-        return min_gap_size
+        min_gap: int = find_min_gap(position)
+        max_gap: int = find_max_gap(position, m)
+        while min_gap < max_gap:
+            mid_gap: int = ceil((min_gap + max_gap) / 2)
+            if gaps_fit(position, mid_gap, m - 1): min_gap = mid_gap
+            else: max_gap = mid_gap - 1
+        return min_gap

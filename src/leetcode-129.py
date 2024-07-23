@@ -7,11 +7,8 @@ Constraints:
  3. The depth of the tree will not exceed 10.
 """
 
-# TODO: Complete solution.
-
 from typing import Optional
 from math import ceil, log10
-
 
 class TreeNode:
     """Represents a binary tree node."""
@@ -37,23 +34,25 @@ class Solution:
         """
         # Internal Helpers
         # ************************************************************
-        def digit_count(val: int) -> int:
-            return ceil(log10(abs(val))) or 1
+        def append_digit(num: int, digit: int) -> int:
+            return 10 * num + digit
         
-        def concatenate_nums(num_1: int, num_2: int) -> int:
-            return 0
+        def drop_digits(val: int, drop_count: int) -> int:
+            digit_count = ceil(log10(val)) if val > 0 else 1
+            return val // 10**drop_count if drop_count < digit_count else 0
 
         # Main Logic
         # ************************************************************  
         result: int = 0
-        node_stack: list[tuple[TreeNode, int]] = [(root, 1)]
         path_value: int = 0
-        while len(node_stack):
-            node, path_count = node_stack.pop()
-            path_value = concatenate_nums(path_value, node.val)
-            if node.right: node_stack.append((node.right, path_value + 1))
-            if node.left: node_stack.append((node.left, path_value + 1))
-            if not (node.left and node.right):
+        point_stack: list[tuple[TreeNode, int]] = [(root, 1)]
+        while point_stack:
+            node, path_count = point_stack.pop()
+            path_value = append_digit(path_value, node.val)
+            if node.right: point_stack.append((node.right, path_count + 1))
+            if node.left: point_stack.append((node.left, path_count + 1))
+            if not node.left and not node.right:
                 result += path_value
-                if path_count < digit_count(path_value): path_value = 0
+                drop_count = path_count - (point_stack[-1][1] - 1 if point_stack else path_count)
+                path_value = drop_digits(path_value, drop_count)                   
         return result

@@ -11,9 +11,14 @@
  * Imperative, Iterative, and Pure Solution
  *
  * Time Complexity: O(?).
- * Space Complexity: O(?) auxiliary space.
+ * Space Complexity: O(1) auxiliary space.
  */
 function longestPalindrome(s: string): string {
-  const result = '';
+  const result: string = s[0];
+  const palindromeHead: number = 0;
+  const palindromeTail: number = 1;
+  while (palindromeTail < s.length) {
+    //
+  }
   return result;
 }
